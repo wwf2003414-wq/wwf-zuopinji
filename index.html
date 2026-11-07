@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SISI — 声音与影像作品集</title>
+  <meta name="description" content="SISI 的个人作品集：音乐、声音设计与视频作品。" />
+  <meta name="theme-color" content="#15171A" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 开屏加载 -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__label">SISI.NB <span>// 正在校准信号</span></div>
+      <div class="loader__bar"><i id="loaderBar"></i></div>
+      <div class="loader__num" id="loaderNum">000</div>
+    </div>
+  </div>
+
+  <a class="skip" href="#works">跳到作品</a>
+
+  <!-- 侧边导航 -->
+  <header class="rail" id="rail">
+    <a class="rail__logo" href="#index" aria-label="回到首页">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20h6l3-9 5 18 4-14 3 8 3-3h8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="bevel"/></svg>
+    </a>
+    <button class="rail__toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
+      <span></span><span></span><span class="sr-only">菜单</span>
+    </button>
+    <nav aria-label="主导航">
+      <ul class="rail__nav" id="navList">
+        <li><a href="#index" data-section="index"><b>首页</b><small>Index</small></a></li>
+        <li><a href="#works" data-section="works"><b>作品</b><small>Works</small></a></li>
+        <li><a href="#about" data-section="about"><b>关于</b><small>About</small></a></li>
+        <li><a href="#contact" data-section="contact"><b>联系</b><small>Contact</small></a></li>
+      </ul>
+    </nav>
+    <div class="rail__meter" aria-hidden="true"><i id="railMeter"></i></div>
+  </header>
+
+  <main>
+    <!-- 首页 / 互动开屏 -->
+    <section class="hero" id="index" data-section>
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero__hud" aria-hidden="true">
+        <span class="hud hud--tl">CH-01 · 48kHz</span>
+        <span class="hud hud--tr" id="hudCoord">X 000 / Y 000</span>
+        <span class="hud hud--br" id="hudFreq">F 440.0 Hz</span>
+      </div>
+      <div class="hero__content">
+        <p class="hero__role">声音设计 · 作曲 · 视频剪辑</p>
+        <h1 class="hero__name" data-text="SISI">SISI</h1>
+        <p class="hero__lead">把声音和画面剪成故事。这里收着我做过的配乐、音效和短片。</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#works">听听作品</a>
+          <a class="btn" href="#contact">合作联系</a>
+        </div>
+      </div>
+      <p class="hero__hint" aria-hidden="true">移动鼠标拨动波形 · 点击发出脉冲</p>
+    </section>
+
+    <!-- 作品 -->
+    <section class="section works" id="works" data-section>
+      <div class="section__head">
+        <h2 class="section__title" data-ghost="WORKS">作品</h2>
+        <div class="filters" role="tablist" aria-label="按类型筛选">
+          <button role="tab" class="filter is-active" data-filter="all" aria-selected="true">全部</button>
+          <button role="tab" class="filter" data-filter="audio" aria-selected="false">音频</button>
+          <button role="tab" class="filter" data-filter="video" aria-selected="false">视频</button>
+        </div>
+      </div>
+
+      <article class="feature" id="feature"></article>
+
+      <div class="tracks" role="table" aria-label="作品列表">
+        <div class="tracks__row tracks__row--head" role="row">
+          <span role="columnheader">#</span>
+          <span role="columnheader">标题</span>
+          <span role="columnheader" class="col-tag">类型</span>
+          <span role="columnheader" class="col-date">日期</span>
+          <span role="columnheader" class="col-dur">时长</span>
+          <span role="columnheader"><span class="sr-only">操作</span></span>
+        </div>
+        <div id="trackList" role="rowgroup"></div>
+      </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="section about" id="about" data-section>
+      <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
+      <div class="about__grid">
+        <div class="about__portrait">
+          <div class="portrait" role="img" aria-label="头像占位，替换为你的照片">
+            <span>放一张你的照片<br /><small>assets/images/avatar.jpg</small></span>
+          </div>
+          <dl class="about__id">
+            <div><dt>代号</dt><dd>SISI</dd></div>
+            <div><dt>所在地</dt><dd>上海</dd></div>
+            <div><dt>状态</dt><dd class="ok">接受约稿</dd></div>
+          </dl>
+        </div>
+        <div class="about__text">
+          <p class="about__lead">我是 SISI，做游戏和短片的声音。</p>
+          <p>从给同学的毕业短片配乐开始，到现在为独立游戏做整套音效和背景音乐。我习惯先看画面再写声音，让每一段声音都有它在画面里的位置。</p>
+          <p>这段介绍是占位文字，替换成你自己的经历、擅长方向和正在做的事。</p>
+          <h3 class="about__sub">常用工具</h3>
+          <ul class="tools">
+            <li>Adobe Audition</li><li>Reaper</li><li>FL Studio</li><li>Premiere Pro</li><li>After Effects</li><li>DaVinci Resolve</li>
+          </ul>
+          <h3 class="about__sub">经历</h3>
+          <ol class="timeline">
+            <li><time>2026</time><span>独立游戏《示例项目》音效与配乐</span></li>
+            <li><time>2025</time><span>短片《示例短片》声音设计，入围某影展</span></li>
+            <li><time>2024</time><span>开始接商业配音与混音项目</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系 -->
+    <section class="section contact" id="contact" data-section>
+      <h2 class="section__title" data-ghost="CONTACT">联系</h2>
+      <p class="contact__lead">有项目想聊？发邮件给我，一般两天内回复。</p>
+      <a class="contact__mail" href="mailto:hello@example.com">hello@example.com</a>
+      <ul class="contact__links">
+        <li><a href="https://space.bilibili.com/" target="_blank" rel="noopener">哔哩哔哩</a></li>
+        <li><a href="https://music.163.com/" target="_blank" rel="noopener">网易云音乐</a></li>
+        <li><a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener">小红书</a></li>
+        <li><a href="https://github.com/wwf2003414-wq" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> SISI</span>
+    <a href="#index">回到顶部</a>
+  </footer>
+
+  <!-- 底部播放器 -->
+  <div class="player" id="player" aria-label="音频播放器" hidden>
+    <button class="player__btn" id="pPlay" aria-label="播放"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M7 4l13 8-13 8z"/><path class="i-pause" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+    <div class="player__info">
+      <strong id="pTitle">—</strong>
+      <span id="pMeta"></span>
+    </div>
+    <canvas class="player__scope" id="pScope" aria-hidden="true"></canvas>
+    <div class="player__time"><span id="pCur">0:00</span> / <span id="pDur">0:00</span></div>
+    <input class="player__seek" id="pSeek" type="range" min="0" max="1000" value="0" aria-label="播放进度" />
+    <button class="player__close" id="pClose" aria-label="关闭播放器">×</button>
+    <audio id="pAudio" preload="metadata" crossorigin="anonymous"></audio>
+  </div>
+
+  <!-- 视频弹窗 -->
+  <dialog class="modal" id="videoModal" aria-label="视频播放">
+    <div class="modal__frame">
+      <div class="modal__bar"><strong id="vTitle"></strong><button id="vClose" aria-label="关闭视频">×</button></div>
+      <div class="modal__screen" id="vScreen"></div>
+    </div>
+  </dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/demo-audio.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
