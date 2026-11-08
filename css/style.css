@@ -159,22 +159,25 @@ main, .footer { margin-left: var(--rail); }
 .hero__role { margin: 0 0 4px; color: var(--amber); font-size: var(--t-md); letter-spacing: .12em; }
 .hero__name {
   margin: 0;
-  font-family: var(--f-latin); font-weight: 700;
-  font-size: var(--t-hero); line-height: .82; letter-spacing: -.02em;
+  font-family: var(--f-cjk); font-weight: 900;
+  font-size: clamp(4.5rem, 15vw, 13rem); line-height: 1; letter-spacing: .02em;
   position: relative;
   color: var(--bone);
 }
-/* 名字的“通道错位”：两层描边副本随鼠标偏移 */
+.hero__latin {
+  margin: 6px 0 0; font-family: var(--f-latin); font-weight: 600;
+  font-size: clamp(1rem, 2.2vw, 1.6rem); letter-spacing: .5em; color: var(--ash);
+}
+/* 名字的“通道错位”：两层实心副本垫在后面，随鼠标偏移 */
+.hero__name { isolation: isolate; }
 .hero__name::before,
 .hero__name::after {
   content: attr(data-text);
-  position: absolute; inset: 0;
-  color: transparent;
-  -webkit-text-stroke: 1px currentColor;
+  position: absolute; inset: 0; z-index: -1;
   pointer-events: none;
 }
-.hero__name::before { color: transparent; -webkit-text-stroke-color: var(--amber); transform: translate(var(--sx, 0px), var(--sy, 0px)); opacity: .85; }
-.hero__name::after { -webkit-text-stroke-color: var(--cyan); transform: translate(calc(var(--sx, 0px) * -1), calc(var(--sy, 0px) * -1)); opacity: .6; }
+.hero__name::before { color: var(--amber); transform: translate(var(--sx, 0px), var(--sy, 0px)); opacity: .9; }
+.hero__name::after { color: var(--cyan); transform: translate(calc(var(--sx, 0px) * -1), calc(var(--sy, 0px) * -1)); opacity: .7; }
 .hero__lead { max-width: 30em; margin: 22px 0 30px; font-size: var(--t-lg); color: rgba(230,226,216,.82); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 .hero__hint {
@@ -210,38 +213,11 @@ main, .footer { margin-left: var(--rail); }
 }
 .section > .section__title { margin-bottom: 48px; }
 
-/* ---------- 作品：筛选 ---------- */
-.filters { display: flex; gap: 4px; background: var(--steel); padding: 4px; }
-.filter {
-  border: 0; background: transparent; padding: 8px 20px; cursor: pointer;
-  color: var(--ash); font-size: var(--t-sm);
-}
-.filter:hover { color: var(--bone); }
-.filter.is-active { background: var(--amber); color: var(--graphite); font-weight: 700; }
-
-/* ---------- 作品：主推 ---------- */
-.feature {
-  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  background: var(--steel);
-  margin-bottom: 48px;
-  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
-}
-.feature__media {
-  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
-  background: var(--steel-2);
-}
-.feature__media canvas, .feature__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.feature__body { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-.feature__tag { color: var(--amber); font-size: var(--t-sm); }
-.feature__title { margin: 0; font-size: var(--t-xl); line-height: 1.25; }
-.feature__desc { margin: 0; color: rgba(230,226,216,.75); max-width: 34em; }
-.feature__meta { font-family: var(--f-latin); color: var(--ash); font-size: var(--t-sm); font-variant-numeric: tabular-nums; }
-.feature .btn { align-self: flex-start; margin-top: 8px; }
 
 /* ---------- 作品：曲目表 ---------- */
 .tracks__row {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) 90px 130px 72px 56px;
+  grid-template-columns: 44px minmax(0, 1fr) 56px 48px;
   align-items: center; gap: 16px;
   padding: 16px 12px;
   border-bottom: 1px solid rgba(230,226,216,.08);
@@ -282,12 +258,9 @@ main, .footer { margin-left: var(--rail); }
 /* ---------- 关于 ---------- */
 .about__grid { display: grid; grid-template-columns: minmax(220px, 340px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); }
 .portrait {
-  aspect-ratio: 4 / 5; background:
-    linear-gradient(135deg, transparent 49.5%, rgba(230,226,216,.08) 50%, transparent 50.5%),
-    var(--steel);
-  display: grid; place-items: center; text-align: center; color: var(--ash); font-size: var(--t-sm);
+  display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover;
+  background: var(--steel); filter: grayscale(.15) contrast(1.02);
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%);
-  background-size: cover; background-position: center;
 }
 .portrait small { font-family: var(--f-latin); opacity: .7; }
 .about__id { margin: 20px 0 0; display: grid; gap: 1px; background: rgba(230,226,216,.08); }
@@ -392,10 +365,9 @@ body.has-player .footer { padding-bottom: 110px; }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 900px) {
-  .feature { grid-template-columns: 1fr; }
   .about__grid { grid-template-columns: 1fr; }
   .about__portrait { max-width: 320px; }
-  .tracks__row { grid-template-columns: 36px minmax(0, 1fr) 64px 56px; }
+  .tracks__row { grid-template-columns: 36px minmax(0, 1fr) 52px 48px; }
   .col-date, .col-tag, .track__date, .track__tag { display: none; }
 }
 

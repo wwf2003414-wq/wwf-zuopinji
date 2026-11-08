@@ -1,0 +1,143 @@
+/* ---------- 版块说明 ---------- */
+.section__note { margin: 0; max-width: 36em; color: rgba(230,226,216,.7); }
+.section__head--tight { margin-bottom: 18px; }
+.section__title--sm { font-size: var(--t-xl); }
+.section__title--sm::before { font-size: 2.4em; }
+.pending {
+  position: absolute; left: 12px; top: 12px; z-index: 1;
+  font-size: var(--t-xs); padding: 2px 8px;
+  background: rgba(21,23,26,.85); color: var(--ash); border: 1px solid rgba(230,226,216,.2);
+}
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-size: var(--t-xs); padding: 3px 10px; border: 1px solid rgba(245,183,0,.5); color: var(--amber); }
+.chips--sm li { border-color: rgba(92,200,214,.45); color: var(--cyan); }
+
+/* ---------- 广告片 ---------- */
+.films { display: grid; gap: 56px; }
+.film {
+  display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px); align-items: center;
+}
+.film--flip .film__media { order: 2; }
+.film__media {
+  position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 0;
+  overflow: hidden; background: var(--steel-2); cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+}
+.film__media canvas, .film__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.film__media:hover canvas, .film__media:hover img { transform: scale(1.03); }
+.film__body { display: flex; flex-direction: column; gap: 14px; }
+.film__title { margin: 0; font-size: var(--t-xl); line-height: 1.3; }
+.film__client { margin: 0; color: var(--ash); font-size: var(--t-sm); }
+.film__points { margin: 4px 0 0; padding-left: 1.1em; color: rgba(230,226,216,.8); }
+.film__points li { margin-bottom: 6px; }
+.film__points li::marker { color: var(--amber); }
+.film .btn { align-self: flex-start; margin-top: 6px; }
+
+/* ---------- 数字人：指标 ---------- */
+.spec {
+  margin: 0 0 72px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 2px solid var(--amber); background: var(--steel);
+}
+.spec div { padding: 20px 22px; border-right: 1px solid rgba(230,226,216,.07); }
+.spec div:last-child { border-right: 0; }
+.spec dt { color: var(--ash); font-size: var(--t-sm); }
+.spec dd { margin: 4px 0 0; white-space: nowrap; font-family: var(--f-latin); font-size: clamp(1.25rem, 2.1vw, 1.953rem); font-weight: 600; line-height: 1.2; }
+
+.sub { margin: 0 0 6px; font-size: var(--t-lg); font-weight: 700; }
+.sub__note { margin: 0 0 24px; color: var(--ash); font-size: var(--t-sm); }
+
+/* ---------- 数字人：声音对比 ---------- */
+.voices { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 72px; }
+.voice { background: var(--steel); padding: 22px; }
+.voice__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.voice__head strong { font-size: var(--t-lg); }
+.voice__head span { color: var(--ash); font-size: var(--t-sm); }
+.voice__text { margin: 8px 0 18px; color: rgba(230,226,216,.7); font-size: var(--t-sm); }
+.voice__rows { display: grid; gap: 8px; }
+.voice__row {
+  display: grid; grid-template-columns: 36px 76px minmax(0, 1fr); align-items: center; gap: 12px;
+  width: 100%; padding: 8px 12px 8px 8px; border: 1px solid transparent; background: var(--graphite);
+  cursor: pointer; text-align: left;
+}
+.voice__row:hover { border-color: rgba(230,226,216,.2); }
+.voice__row.is-playing { border-color: var(--amber); }
+.voice__play {
+  width: 36px; height: 36px; display: grid; place-items: center; background: var(--steel-2);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.voice__play svg { width: 13px; height: 13px; fill: currentColor; }
+.voice__row--lora .voice__play { background: var(--cyan); color: var(--graphite); }
+.voice__row.is-playing .voice__play { background: var(--amber); color: var(--graphite); }
+.voice__label { font-size: var(--t-sm); }
+.voice__row--lora .voice__label { color: var(--cyan); }
+.voice__wave { width: 100%; height: 34px; display: block; }
+
+/* ---------- 数字人：流程 ---------- */
+.pipeline { list-style: none; margin: 0 0 72px; padding: 0; }
+.step {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 24px; padding: 28px 0; border-top: 1px solid rgba(230,226,216,.08);
+}
+.step:last-child { border-bottom: 1px solid rgba(230,226,216,.08); }
+.step--text { grid-template-columns: 64px minmax(0, 1fr); }
+.step__num { font-family: var(--f-latin); font-size: var(--t-xl); font-weight: 600; color: var(--amber); line-height: 1.1; }
+.step__title { margin: 0 0 10px; font-size: var(--t-lg); }
+.step__body .chips { margin-bottom: 12px; }
+.step__desc { margin: 0; color: rgba(230,226,216,.75); max-width: 32em; }
+.step__media { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-content: start; }
+.slot {
+  position: relative; display: block; aspect-ratio: 16 / 9; padding: 0; border: 0; overflow: hidden;
+  background: var(--steel-2); cursor: pointer;
+}
+.slot canvas, .slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slot:hover { outline: 1px solid var(--amber); }
+.slot__label {
+  position: absolute; left: 0; bottom: 0; padding: 4px 10px; font-size: var(--t-xs);
+  background: var(--graphite); color: var(--bone);
+}
+
+/* ---------- 数字人：账号成果 ---------- */
+.accounts { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.account { background: var(--steel); padding: 24px; display: flex; flex-direction: column; gap: 6px; border-left: 3px solid var(--amber); }
+.account__name { font-size: var(--t-sm); color: var(--ash); }
+.account__nums { font-family: var(--f-latin); display: flex; align-items: baseline; gap: 12px; }
+.account__nums s { color: var(--ash); font-size: var(--t-lg); text-decoration-thickness: 1px; }
+.account__nums i { font-style: normal; color: var(--ash); }
+.account__nums b { font-size: var(--t-2xl); line-height: 1.05; font-weight: 600; }
+.account__note { font-size: var(--t-sm); color: rgba(230,226,216,.75); }
+
+/* ---------- 音乐 + 短片 ---------- */
+.more__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); }
+.more .section__note { margin-bottom: 20px; font-size: var(--t-sm); }
+.shorts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.short { display: flex; flex-direction: column; gap: 4px; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
+.short__media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--steel-2); margin-bottom: 8px; }
+.short__media canvas, .short__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.short:hover .short__media { outline: 1px solid var(--amber); }
+.short__title { font-weight: 500; }
+.short__note { color: var(--ash); font-size: var(--t-sm); }
+
+/* ---------- 关于：技能 ---------- */
+.skills { margin: 0; display: grid; gap: 1px; background: rgba(230,226,216,.08); }
+.skills div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; padding: 12px 0; background: var(--graphite); }
+.skills dt { color: var(--amber); font-size: var(--t-sm); font-weight: 500; }
+.skills dd { margin: 0; font-size: var(--t-sm); color: rgba(230,226,216,.85); }
+.timeline__role { flex: 0 0 9.5em; color: var(--amber); font-size: var(--t-sm); padding-top: 2px; }
+
+/* ---------- 响应式（新版块） ---------- */
+@media (max-width: 900px) {
+  .film, .more__grid { grid-template-columns: 1fr; }
+  .film--flip .film__media { order: 0; }
+  .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spec div { border-bottom: 1px solid rgba(230,226,216,.07); }
+  .step, .step--text { grid-template-columns: 44px minmax(0, 1fr); }
+  .step__media { grid-column: 2; }
+}
+@media (max-width: 720px) {
+  .shorts { grid-template-columns: 1fr; }
+  .skills div { grid-template-columns: 1fr; gap: 2px; }
+  .timeline li { flex-direction: column; gap: 2px; }
+  .timeline__role { flex: none; }
+  .voices { grid-template-columns: 1fr; }
+}

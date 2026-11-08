@@ -1,70 +1,50 @@
-# SISI.NB — 个人作品集
+# 王炜锋 — AI 视频作品集
 
-声音与影像作品集网站。纯静态页面（HTML + CSS + JS），不需要安装任何依赖、不需要构建。
+AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安装依赖、不需要构建，双击 `index.html` 就能打开。
 
-## 本地预览
+## 页面结构
 
-直接双击 `index.html` 用浏览器打开即可。
+1. **首页**：可互动的波形开屏（鼠标拨动、点击发脉冲）
+2. **AI 创意广告片**：两支广告片，大图 + 分工 + 要点
+3. **拟真数字人**：关键指标 → 本人原声 vs LoRA 声音对比 → 7 步产出流程（含唇周 LoRA 前后对比）→ 账号成果
+4. **更多**：AI 音乐 + 个人创意视觉短片
+5. **关于**：照片、简介、专业技能、经历
+6. **联系**：邮箱
 
-## 更新内容
+## 替换内容：只改 `js/data.js`
 
-| 想改什么 | 改哪里 |
-| --- | --- |
-| 作品列表（音频 / 视频） | `js/data.js` |
-| 名字、简介、经历、工具 | `index.html` 里的「关于」部分 |
-| 邮箱和社交链接 | `index.html` 里的「联系」部分 |
-| 颜色和字体 | `css/style.css` 顶部的 `:root` 变量 |
-| 开屏互动波形 | `js/hero.js` |
+| 版块 | 字段 | 填什么 |
+| --- | --- | --- |
+| 广告片 `ads` | `embed` 或 `src`、`cover` | B 站嵌入链接或本地视频；封面图 |
+| 声音对比 `voices` | `original.src`、`lora.src`、`text` | 本人原声、LoRA 生成音频、对应文案 |
+| 产出流程 `pipeline` | 每一步的 `media` | 过程截图（`type: "image"`）或视频片段（`type: "video"`），可加可删 |
+| AI 音乐 `music` | `src`、`title`、`subtitle`、`duration` | 音频文件和信息 |
+| 视觉短片 `shorts` | `embed` 或 `src`、`cover`、`note` | 视频和一句话介绍 |
 
-### 添加一条作品
+- 没填媒体的位置会显示「待上传」和自动生成的占位封面；没填 `src` 的音频会播放示例音。
+- B 站嵌入链接：`https://player.bilibili.com/player.html?bvid=BV号&autoplay=0`
+- 文件放进 `assets/media/`（音视频）和 `assets/images/`（图片）。单个文件建议小于 50MB，GitHub 上限是 100MB；大视频建议先传 B 站再用 `embed`。
 
-在 `js/data.js` 的 `WORKS` 数组里加一项：
-
-```js
-{
-  id: "my-new-track",          // 唯一英文 id
-  type: "audio",               // "audio" 或 "video"
-  title: "作品标题",
-  subtitle: "一句话说明",
-  date: "2026-11-07",
-  duration: "3:20",
-  desc: "主推卡片里显示的介绍（可选）",
-  src: "assets/media/my-new-track.mp3",  // 音频/视频文件
-  embed: "",                   // 视频可填 B 站嵌入链接，优先于 src
-  cover: "assets/images/my-new-track.jpg", // 封面（可选）
-  featured: false              // true = 显示在列表上方的大卡片
-}
-```
-
-- 音频 `src` 留空时会播放浏览器自动生成的示例音，方便先看效果。
-- B 站嵌入链接格式：`https://player.bilibili.com/player.html?bvid=BV号&autoplay=0`
-- 媒体文件放进 `assets/media/`，图片放进 `assets/images/`。单个文件建议小于 50MB（GitHub 限制 100MB）；大视频建议传到 B 站后用 `embed`。
+个人简介、技能、经历、联系方式在 `index.html` 里直接改。
 
 ## 部署上线（仓库保持私有）
 
-GitHub 免费账号的私有仓库不能用 GitHub Pages，可以用下面任意一个平台，它们都支持私有仓库、免费，且每次 push 后自动更新：
+免费 GitHub 的私有仓库不能用 GitHub Pages，可以用下面的平台，都支持私有仓库，每次 push 后自动更新：
 
-**Vercel**
-1. 用 GitHub 账号登录 https://vercel.com
-2. Add New → Project → 选择 `sisi-nb` 仓库（第一次需要授权访问私有仓库）
-3. Framework Preset 选 **Other**，其他都不用改，点 Deploy
+**Vercel**：用 GitHub 登录 https://vercel.com → Add New → Project → 选 `wwf-zuopinji` → Framework Preset 选 Other → Deploy
 
-**Netlify**
-1. 用 GitHub 账号登录 https://app.netlify.com
-2. Add new site → Import an existing project → GitHub → 选择 `sisi-nb`
-3. Build command 留空，Publish directory 填 `.`，点 Deploy
-
-**国内访问更快的选择**：腾讯云 EdgeOne Pages、阿里云 OSS 静态托管也都可以直接上传这个文件夹。
+**Netlify**：用 GitHub 登录 https://app.netlify.com → Add new site → Import from GitHub → 选 `wwf-zuopinji` → Build command 留空，Publish directory 填 `.` → Deploy
 
 ## 文件结构
 
 ```
-index.html          页面结构
-css/style.css       样式
+index.html          页面结构和个人信息
+css/style.css       基础样式（配色、导航、开屏、播放器）
+css/components.css  各版块样式（广告片、数字人、音乐、短片）
 js/data.js          作品数据（最常改的文件）
 js/hero.js          开屏互动波形
 js/player.js        底部音频播放器
-js/demo-audio.js    占位作品的示例音生成
-js/main.js          列表、筛选、导航、视频弹窗
-assets/             图标、图片、媒体文件
+js/demo-audio.js    占位音频生成
+js/main.js          各版块渲染、导航、视频弹窗
+assets/             图标、照片、媒体文件
 ```

@@ -3,28 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SISI — 声音与影像作品集</title>
-  <meta name="description" content="SISI 的个人作品集：音乐、声音设计与视频作品。" />
+  <title>王炜锋 — AI 视频作品集</title>
+  <meta name="description" content="王炜锋的作品集：AIGC 品牌广告片、拟真数字人制作流程、AI 音乐与视觉短片。" />
   <meta name="theme-color" content="#15171A" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
 </head>
 <body>
-  <!-- 开屏加载 -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader__inner">
-      <div class="loader__label">SISI.NB <span>// 正在校准信号</span></div>
+      <div class="loader__label">WANG WEIFENG <span>// 正在校准信号</span></div>
       <div class="loader__bar"><i id="loaderBar"></i></div>
       <div class="loader__num" id="loaderNum">000</div>
     </div>
   </div>
 
-  <a class="skip" href="#works">跳到作品</a>
+  <a class="skip" href="#ads">跳到作品</a>
 
-  <!-- 侧边导航 -->
   <header class="rail" id="rail">
     <a class="rail__logo" href="#index" aria-label="回到首页">
       <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20h6l3-9 5 18 4-14 3 8 3-3h8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="bevel"/></svg>
@@ -35,7 +34,9 @@
     <nav aria-label="主导航">
       <ul class="rail__nav" id="navList">
         <li><a href="#index" data-section="index"><b>首页</b><small>Index</small></a></li>
-        <li><a href="#works" data-section="works"><b>作品</b><small>Works</small></a></li>
+        <li><a href="#ads" data-section="ads"><b>广告片</b><small>Films</small></a></li>
+        <li><a href="#human" data-section="human"><b>数字人</b><small>Avatar</small></a></li>
+        <li><a href="#more" data-section="more"><b>更多</b><small>More</small></a></li>
         <li><a href="#about" data-section="about"><b>关于</b><small>About</small></a></li>
         <li><a href="#contact" data-section="contact"><b>联系</b><small>Contact</small></a></li>
       </ul>
@@ -53,40 +54,73 @@
         <span class="hud hud--br" id="hudFreq">F 440.0 Hz</span>
       </div>
       <div class="hero__content">
-        <p class="hero__role">声音设计 · 作曲 · 视频剪辑</p>
-        <h1 class="hero__name" data-text="SISI">SISI</h1>
-        <p class="hero__lead">把声音和画面剪成故事。这里收着我做过的配乐、音效和短片。</p>
+        <p class="hero__role">AI 视频导演 · AIGC 视听内容创作</p>
+        <h1 class="hero__name" data-text="王炜锋">王炜锋</h1>
+        <p class="hero__latin" aria-hidden="true">WANG WEIFENG</p>
+        <p class="hero__lead">用 AI 生成画面，用声音带动情绪。我做品牌广告片，也做每天都能稳定出片的拟真数字人。</p>
         <div class="hero__actions">
-          <a class="btn btn--solid" href="#works">听听作品</a>
-          <a class="btn" href="#contact">合作联系</a>
+          <a class="btn btn--solid" href="#ads">看作品</a>
+          <a class="btn" href="#contact">联系我</a>
         </div>
       </div>
       <p class="hero__hint" aria-hidden="true">移动鼠标拨动波形 · 点击发出脉冲</p>
     </section>
 
-    <!-- 作品 -->
-    <section class="section works" id="works" data-section>
+    <!-- 广告宣传片 -->
+    <section class="section" id="ads" data-section>
       <div class="section__head">
-        <h2 class="section__title" data-ghost="WORKS">作品</h2>
-        <div class="filters" role="tablist" aria-label="按类型筛选">
-          <button role="tab" class="filter is-active" data-filter="all" aria-selected="true">全部</button>
-          <button role="tab" class="filter" data-filter="audio" aria-selected="false">音频</button>
-          <button role="tab" class="filter" data-filter="video" aria-selected="false">视频</button>
-        </div>
+        <h2 class="section__title" data-ghost="FILMS">AI 创意广告片</h2>
+        <p class="section__note">画面全部由 AI 生成，创意、脚本、分镜和声音由我完成。</p>
+      </div>
+      <div class="films" id="films"></div>
+    </section>
+
+    <!-- 数字人 -->
+    <section class="section human" id="human" data-section>
+      <div class="section__head">
+        <h2 class="section__title" data-ghost="AVATAR">拟真数字人</h2>
+        <p class="section__note">独立负责。为财经短视频账号打造的数字人，解决通用数字人音色同质、语气生硬、口型不自然的问题。</p>
       </div>
 
-      <article class="feature" id="feature"></article>
+      <dl class="spec">
+        <div><dt>训练素材</dt><dd>2 条视频</dd></div>
+        <div><dt>单人训练耗时</dt><dd>3.8 分钟</dd></div>
+        <div><dt>配音中文字错率</dt><dd>3.4%</dd></div>
+        <div><dt>英文抽测字错率</dt><dd>0%</dd></div>
+        <div><dt>落地账号</dt><dd>2 个</dd></div>
+      </dl>
 
-      <div class="tracks" role="table" aria-label="作品列表">
-        <div class="tracks__row tracks__row--head" role="row">
-          <span role="columnheader">#</span>
-          <span role="columnheader">标题</span>
-          <span role="columnheader" class="col-tag">类型</span>
-          <span role="columnheader" class="col-date">日期</span>
-          <span role="columnheader" class="col-dur">时长</span>
-          <span role="columnheader"><span class="sr-only">操作</span></span>
+      <h3 class="sub" id="voice-title">声音对比：本人原声 vs 声音克隆 LoRA</h3>
+      <p class="sub__note">同一段文案，先听本人原声，再听 LoRA 生成的声音。</p>
+      <div class="voices" id="voices" aria-labelledby="voice-title"></div>
+
+      <h3 class="sub" id="pipe-title">从素材到成片的产出流程</h3>
+      <p class="sub__note">每一步都可以点开看过程素材。</p>
+      <ol class="pipeline" id="pipeline" aria-labelledby="pipe-title"></ol>
+
+      <h3 class="sub">账号成果</h3>
+      <div class="accounts" id="accounts"></div>
+    </section>
+
+    <!-- 音乐 + 短片 -->
+    <section class="section more" id="more" data-section>
+      <div class="more__grid">
+        <div>
+          <div class="section__head section__head--tight">
+            <h2 class="section__title section__title--sm" data-ghost="MUSIC">AI 音乐</h2>
+          </div>
+          <p class="section__note">自己用 AI 创作的音乐，也是我做片子时的配乐来源。</p>
+          <div class="tracks" role="table" aria-label="AI 音乐列表">
+            <div id="trackList" role="rowgroup"></div>
+          </div>
         </div>
-        <div id="trackList" role="rowgroup"></div>
+        <div>
+          <div class="section__head section__head--tight">
+            <h2 class="section__title section__title--sm" data-ghost="SHORTS">视觉短片</h2>
+          </div>
+          <p class="section__note">项目之外的个人创作。</p>
+          <div class="shorts" id="shorts"></div>
+        </div>
       </div>
     </section>
 
@@ -95,28 +129,33 @@
       <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
       <div class="about__grid">
         <div class="about__portrait">
-          <div class="portrait" role="img" aria-label="头像占位，替换为你的照片">
-            <span>放一张你的照片<br /><small>assets/images/avatar.jpg</small></span>
-          </div>
+          <img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" />
           <dl class="about__id">
-            <div><dt>代号</dt><dd>SISI</dd></div>
-            <div><dt>所在地</dt><dd>上海</dd></div>
-            <div><dt>状态</dt><dd class="ok">接受约稿</dd></div>
+            <div><dt>姓名</dt><dd>王炜锋</dd></div>
+            <div><dt>求职方向</dt><dd>AI 视频生成 / AIGC</dd></div>
+            <div><dt>学校</dt><dd>上海师范大学天华学院</dd></div>
+            <div><dt>专业</dt><dd>音乐教育 / 计算机科学与技术</dd></div>
+            <div><dt>本科</dt><dd>2021 – 2025</dd></div>
           </dl>
         </div>
         <div class="about__text">
-          <p class="about__lead">我是 SISI，做游戏和短片的声音。</p>
-          <p>从给同学的毕业短片配乐开始，到现在为独立游戏做整套音效和背景音乐。我习惯先看画面再写声音，让每一段声音都有它在画面里的位置。</p>
-          <p>这段介绍是占位文字，替换成你自己的经历、擅长方向和正在做的事。</p>
-          <h3 class="about__sub">常用工具</h3>
-          <ul class="tools">
-            <li>Adobe Audition</li><li>Reaper</li><li>FL Studio</li><li>Premiere Pro</li><li>After Effects</li><li>DaVinci Resolve</li>
-          </ul>
+          <p class="about__lead">我是 AIGC 视频创作者，从创意、脚本分镜、AI 生成到声音设计，整条流程都自己做。</p>
+          <p>音乐教育和计算机的双背景，让我习惯用配乐、音效和语音节奏去驱动画面情绪，也能自己搭训练流程和剪辑工具，把一次性的创作变成可以反复生产的方案。</p>
+
+          <h3 class="about__sub">专业技能</h3>
+          <dl class="skills">
+            <div><dt>AI 视频</dt><dd>即梦、LibTV、TapNow、Seedance；文生视频、图生视频、数字人驱动</dd></div>
+            <div><dt>AI 图像</dt><dd>Midjourney、Nano Banana 2、Stable Diffusion；用提示词迭代和参考图约束保持角色与风格一致</dd></div>
+            <div><dt>AI 数字人</dt><dd>IndexTTS 2.5 声音克隆 LoRA 微调、唇周 LoRA 训练、情感控制、人声分离、Whisper 转写与质检</dd></div>
+            <div><dt>声音设计</dt><dd>配乐选择、音效设计、混音</dd></div>
+            <div><dt>后期制作</dt><dd>Premiere Pro、After Effects、剪映、Photoshop；剪辑、LOG 素材调色、字幕与包装</dd></div>
+          </dl>
+
           <h3 class="about__sub">经历</h3>
           <ol class="timeline">
-            <li><time>2026</time><span>独立游戏《示例项目》音效与配乐</span></li>
-            <li><time>2025</time><span>短片《示例短片》声音设计，入围某影展</span></li>
-            <li><time>2024</time><span>开始接商业配音与混音项目</span></li>
+            <li><span class="timeline__role">独立负责</span><span>AI 拟真数字人制作，落地 2 个抖音财经账号的日常生产</span></li>
+            <li><span class="timeline__role">创意 · 编剧 · 声音</span><span>EBC Financial Group AIGC 品牌广告宣传片</span></li>
+            <li><span class="timeline__role">编导 · 自动化剪辑</span><span>抖音财经账号「交易员cool」「Jimmy的美金日记」内容制作</span></li>
           </ol>
         </div>
       </div>
@@ -125,19 +164,13 @@
     <!-- 联系 -->
     <section class="section contact" id="contact" data-section>
       <h2 class="section__title" data-ghost="CONTACT">联系</h2>
-      <p class="contact__lead">有项目想聊？发邮件给我，一般两天内回复。</p>
-      <a class="contact__mail" href="mailto:hello@example.com">hello@example.com</a>
-      <ul class="contact__links">
-        <li><a href="https://space.bilibili.com/" target="_blank" rel="noopener">哔哩哔哩</a></li>
-        <li><a href="https://music.163.com/" target="_blank" rel="noopener">网易云音乐</a></li>
-        <li><a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener">小红书</a></li>
-        <li><a href="https://github.com/wwf2003414-wq" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
+      <p class="contact__lead">正在找 AI 视频生成、AIGC 视听内容创作方向的工作，欢迎发邮件聊。</p>
+      <a class="contact__mail" href="mailto:w2240994753@163.com">w2240994753@163.com</a>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© <span id="year"></span> SISI</span>
+    <span>© <span id="year"></span> 王炜锋</span>
     <a href="#index">回到顶部</a>
   </footer>
 
@@ -155,10 +188,10 @@
     <audio id="pAudio" preload="metadata" crossorigin="anonymous"></audio>
   </div>
 
-  <!-- 视频弹窗 -->
-  <dialog class="modal" id="videoModal" aria-label="视频播放">
+  <!-- 视频 / 图片弹窗 -->
+  <dialog class="modal" id="videoModal" aria-label="作品查看">
     <div class="modal__frame">
-      <div class="modal__bar"><strong id="vTitle"></strong><button id="vClose" aria-label="关闭视频">×</button></div>
+      <div class="modal__bar"><strong id="vTitle"></strong><button id="vClose" aria-label="关闭">×</button></div>
       <div class="modal__screen" id="vScreen"></div>
     </div>
   </dialog>
