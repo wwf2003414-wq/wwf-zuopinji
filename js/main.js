@@ -176,36 +176,162 @@
     });
   }
 
-  /* ---------- 产出流程 ---------- */
-  function renderPipeline() {
-    const box = $("#pipeline");
-    (site.pipeline || []).forEach((s, i) => {
-      const li = document.createElement("li");
-      li.className = "step";
-      li.innerHTML = `
-        <span class="step__num">${String(i + 1).padStart(2, "0")}</span>
-        <div class="step__body">
-          <h4 class="step__title">${esc(s.title)}</h4>
-          <ul class="chips chips--sm">${(s.tools || []).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-          <p class="step__desc">${esc(s.desc)}</p>
+  /* ---------- 产出流程：分步面板 ---------- */
+  function renderFlow() {
+    const box = $("#flow");
+    const steps = site.pipeline || [];
+    if (!steps.length) return;
+    const num = (i) => String(i + 1).padStart(2, "0");
+
+    box.innerHTML = `
+      <div class="flow__tabs" role="tablist" aria-label="流程步骤">
+        ${steps.map((s, i) => `
+          <button class="flow__tab" type="button" role="tab" id="flow-tab-${i}" aria-controls="flow-panel" aria-selected="false" tabindex="-1" data-i="${i}">
+            <i>${num(i)}</i><span>${esc(s.short || s.title)}</span>
+          </button>`).join("")}
+        <span class="flow__bar" aria-hidden="true"><b></b></span>
+      </div>
+      <div class="flow__panel" id="flow-panel" role="tabpanel" aria-live="polite">
+        <div class="flow__info">
+          <p class="flow__count"><b></b> / ${num(steps.length - 1)}</p>
+          <h4 class="flow__title"></h4>
+          <ul class="chips chips--sm flow__tools"></ul>
+          <p class="flow__desc"></p>
+          <div class="flow__nav">
+            <button class="flow__arrow" type="button" data-dir="-1" aria-label="上一步">←</button>
+            <button class="flow__arrow flow__arrow--next" type="button" data-dir="1">下一步 →</button>
+          </div>
         </div>
-        <div class="step__media"></div>`;
-      const mbox = $(".step__media", li);
-      if (!(s.media || []).length) { mbox.remove(); li.classList.add("step--text"); }
-      (s.media || []).forEach((m) => {
+        <figure class="flow__shot">
+          <figcaption><span>操作面板</span><em class="flow__shotlabel"></em></figcaption>
+          <button class="flow__frame flow__frame--shot" type="button"></button>
+        </figure>
+        <figure class="flow__result">
+          <figcaption><span>产出效果</span><span class="flow__switch" role="group" aria-label="切换效果"></span></figcaption>
+          <div class="flow__frame flow__frame--result"></div>
+        </figure>
+      </div>`;
+
+    const tabs = $$(".flow__tab", box);
+    const bar = $(".flow__bar b", box);
+    const shotFrame = $(".flow__frame--shot", box);
+    const resFrame = $(".flow__frame--result", box);
+    const sw = $(".flow__switch", box);
+    let cur = 0;
+
+    function fillShot(s) {
+      const p = s.panel || { id: `p-${cur}`, label: "操作面板" };
+      shotFrame.innerHTML = "";
+      if (p.src) { const img = new Image(); img.src = p.src; img.alt = `${s.title} 操作面板`; shotFrame.appendChild(img); }
+      else {
+        shotFrame.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "92,200,214", play: false }));
+        shotFrame.insertAdjacentHTML("beforeend", '<span class="pending">待上传截图</span>');
+      }
+      $(".flow__shotlabel", box).textContent = p.label || "";
+      shotFrame.setAttribute("aria-label", `放大查看：${s.title} 操作面板`);
+      shotFrame.onclick = () => openMedia({ ...p, type: "image" }, `${s.title} · ${p.label || "操作面板"}`);
+    }
+
+    function fillResult(s, k) {
+      const r = (s.results || [])[k];
+      resFrame.innerHTML = "";
+      $$(".flow__chip", sw).forEach((b, j) => b.setAttribute("aria-pressed", j === k));
+      if (!r) return;
+      const title = `${s.title} · ${r.label}`;
+      if (r.type === "audio") {
         const b = document.createElement("button");
-        b.type = "button";
-        b.className = "slot";
-        b.setAttribute("aria-label", `查看：${s.title} · ${m.label}`);
-        const isImg = m.type === "image";
-        if (isImg && m.src) {
-          const img = new Image(); img.src = m.src; img.alt = ""; img.loading = "lazy"; b.appendChild(img);
-        } else fillCover(b, m, { w: 640, h: 360, play: !isImg, accent: isImg ? "92,200,214" : "245,183,0" });
-        b.insertAdjacentHTML("beforeend", `<span class="slot__label">${esc(m.label)}</span>${hasMedia(m) ? "" : '<span class="pending">待上传</span>'}`);
-        b.addEventListener("click", () => openMedia(m, `${s.title} · ${m.label}`));
-        mbox.appendChild(b);
+        b.type = "button"; b.className = "flow__audio voice__row"; b.dataset.id = r.id;
+        b.innerHTML = `<span class="voice__play">${ICON_PLAY}</span><span class="voice__label">${esc(r.label)}</span>`;
+        b.appendChild(waveBars(r.id, "92,200,214"));
+        b.addEventListener("click", () => window.Player.play({ id: r.id, title, subtitle: "拟真数字人流程", src: r.src, duration: "0:12" }));
+        resFrame.appendChild(b);
+        if (!r.src) resFrame.insertAdjacentHTML("beforeend", '<span class="pending">待上传 · 现在是示例音</span>');
+        syncPlaying(window.Player.state());
+      } else if (r.type === "video" && r.src && !r.embed) {
+        const v = document.createElement("video");
+        v.src = r.src; v.controls = true; v.playsInline = true; v.preload = "metadata";
+        if (r.cover) v.poster = r.cover;
+        resFrame.appendChild(v);
+      } else if (r.type === "image" && r.src) {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "flow__zoom";
+        const img = new Image(); img.src = r.src; img.alt = title; b.appendChild(img);
+        b.addEventListener("click", () => openMedia(r, title));
+        resFrame.appendChild(b);
+      } else {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "flow__zoom"; b.setAttribute("aria-label", `查看：${title}`);
+        fillCover(b, r, { w: 960, h: 540, play: r.type !== "image" });
+        if (!hasMedia(r)) b.insertAdjacentHTML("beforeend", '<span class="pending">待上传</span>');
+        b.addEventListener("click", () => openMedia(r, title));
+        resFrame.appendChild(b);
+      }
+    }
+
+    function go(i, focus) {
+      cur = (i + steps.length) % steps.length;
+      const s = steps[cur];
+      tabs.forEach((t, j) => {
+        const on = j === cur;
+        t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+        t.classList.toggle("is-done", j < cur);
       });
-      box.appendChild(li);
+      if (focus) tabs[cur].focus();
+      bar.style.width = (steps.length > 1 ? (cur / (steps.length - 1)) * 100 : 100) + "%";
+      $(".flow__count b", box).textContent = num(cur);
+      $(".flow__title", box).textContent = s.title;
+      $(".flow__tools", box).innerHTML = (s.tools || []).map((t) => `<li>${esc(t)}</li>`).join("");
+      $(".flow__desc", box).textContent = s.desc || "";
+      $(".flow__arrow--next", box).textContent = cur === steps.length - 1 ? "回到第一步 ↺" : "下一步 →";
+      const rs = s.results || [];
+      sw.innerHTML = rs.length > 1 ? rs.map((r, j) => `<button class="flow__chip" type="button" data-k="${j}">${esc(r.label)}</button>`).join("") : (rs[0] ? `<em>${esc(rs[0].label)}</em>` : "");
+      $$(".flow__chip", sw).forEach((b) => b.addEventListener("click", () => fillResult(s, +b.dataset.k)));
+      fillShot(s);
+      fillResult(s, 0);
+      const panel = $(".flow__panel", box);
+      panel.setAttribute("aria-labelledby", `flow-tab-${cur}`);
+      if (!reduce) { panel.classList.remove("is-enter"); void panel.offsetWidth; panel.classList.add("is-enter"); }
+    }
+
+    tabs.forEach((t) => t.addEventListener("click", () => go(+t.dataset.i)));
+    $$(".flow__arrow", box).forEach((b) => b.addEventListener("click", () => go(cur + +b.dataset.dir)));
+    box.addEventListener("keydown", (e) => {
+      if (e.target.closest("video")) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1, e.target.classList.contains("flow__tab")); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1, e.target.classList.contains("flow__tab")); }
+    });
+    go(0);
+  }
+
+  /* ---------- 复制邮箱 ---------- */
+  function setupCopy() {
+    const btn = $("#copyMail");
+    if (!btn) return;
+    const label = $("span", btn);
+    let timer = 0;
+    async function copy(text) {
+      try { await navigator.clipboard.writeText(text); return true; }
+      catch (e) {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        let ok = false;
+        try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+        ta.remove();
+        return ok;
+      }
+    }
+    btn.addEventListener("click", async () => {
+      const ok = await copy(btn.dataset.copy);
+      clearTimeout(timer);
+      btn.classList.toggle("is-copied", ok);
+      if (!ok) {
+        // 浏览器不允许写剪贴板时，帮用户选中邮箱文字
+        const r = document.createRange(); r.selectNodeContents($("#mailText"));
+        const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      }
+      label.textContent = ok ? "已复制" : "已选中，按 Ctrl+C";
+      timer = setTimeout(() => { btn.classList.remove("is-copied"); label.textContent = "复制"; }, 2200);
     });
   }
 
@@ -239,7 +365,7 @@
 
   /* ---------- 视觉短片 ---------- */
   function renderShorts() {
-    const box = $("#shorts");
+    const box = $("#shortList");
     (site.shorts || []).forEach((s) => {
       const b = document.createElement("button");
       b.type = "button";
@@ -267,9 +393,10 @@
   }
   document.addEventListener("player:change", (e) => syncPlaying(e.detail));
 
-  /* ---------- 导航高亮 + 侧栏进度 ---------- */
-  const links = $$(".rail__nav a");
-  const meter = $("#railMeter");
+  /* ---------- 导航高亮 + 顶部进度条 ---------- */
+  const links = $$(".topbar__nav a[data-section]");
+  const meter = $("#navMeter");
+  const topbar = $("#topbar");
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (en.isIntersecting) links.forEach((a) => a.classList.toggle("is-active", a.dataset.section === en.target.id));
@@ -278,7 +405,8 @@
   $$("[data-section]").filter((s) => s.id).forEach((s) => io.observe(s));
   function onScroll() {
     const max = document.documentElement.scrollHeight - innerHeight;
-    meter.style.height = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+    meter.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+    topbar.classList.toggle("is-scrolled", scrollY > 40);
   }
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
@@ -297,8 +425,9 @@
 
   renderFilms();
   renderVoices();
-  renderPipeline();
+  renderFlow();
   renderAccounts();
   renderTracks();
   renderShorts();
+  setupCopy();
 })();

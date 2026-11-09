@@ -61,53 +61,76 @@ window.SITE = {
     }
   ],
 
-  /* ---------- 数字人短视频产出流程 ----------
-     media 里每一项是一个视频/图片位：type 为 "video" 或 "image" */
+  /* ---------- 数字人短视频产出流程（网页上是可点击的分步面板） ----------
+     每一步：
+       panel:   操作面板截图（左边大图），填 src 即可，例如 "assets/images/step3-panel.png"
+       results: 这一步的效果（右边），可以放多个，会出现切换按钮
+                type: "video"（填 embed 或 src） / "image"（填 src） / "audio"（填 src） */
   pipeline: [
     {
       title: "素材采集",
+      short: "素材",
       tools: ["本人授权"],
       desc: "每位说话人只需要 2 条口播视频。目前训练过 3 位说话人，都经过本人授权。",
-      media: []
+      panel: { id: "p1-panel", label: "素材整理", src: "" },
+      results: [{ id: "p1-raw", type: "video", label: "原始口播素材", embed: "", src: "" }]
     },
     {
       title: "人声分离与转写",
+      short: "分离转写",
       tools: ["人声分离", "Whisper"],
       desc: "去掉背景音只留人声，用 Whisper 转写后逐句质检，整理成干净的训练语料。",
-      media: []
+      panel: { id: "p2-panel", label: "分离 / 转写界面", src: "" },
+      results: [
+        { id: "p2-before", type: "audio", label: "分离前", src: "" },
+        { id: "p2-after", type: "audio", label: "纯人声", src: "" }
+      ]
     },
     {
       title: "声音克隆 LoRA",
+      short: "声音 LoRA",
       tools: ["IndexTTS 2.5", "LoRA 微调"],
       desc: "在 IndexTTS 2.5 上搭建 LoRA 训练流程，3.8 分钟完成一位新说话人的训练。",
-      media: [{ id: "step-voice-ui", type: "image", label: "训练界面", src: "" }]
+      panel: { id: "p3-panel", label: "训练界面", src: "" },
+      results: [{ id: "p3-gen", type: "audio", label: "LoRA 生成试听", src: "" }]
     },
     {
       title: "听感调优",
+      short: "听感调优",
       tools: ["情感控制", "本地 WebUI"],
       desc: "从音高、语速、停顿、音色对比原声和生成音频，反复调整情感与语速参数，沉淀出“口播”“闲聊”等场景预设。整套工具封装成本地 WebUI，可以离线部署。",
-      media: []
+      panel: { id: "p4-panel", label: "本地 WebUI", src: "" },
+      results: [
+        { id: "p4-before", type: "audio", label: "调优前", src: "" },
+        { id: "p4-after", type: "audio", label: "调优后", src: "" }
+      ]
     },
     {
       title: "唇周 LoRA 训练",
+      short: "唇周 LoRA",
       tools: ["局部训练", "口型同步"],
       desc: "为两个账号的数字人分别训练唇周 LoRA，让口型跟上语音，面部看起来更真实。",
-      media: [
+      panel: { id: "p5-panel", label: "训练界面", src: "" },
+      results: [
         { id: "lip-before", type: "video", label: "训练前", embed: "", src: "" },
         { id: "lip-after", type: "video", label: "训练后", embed: "", src: "" }
       ]
     },
     {
       title: "数字人驱动",
+      short: "数字人驱动",
       tools: ["数字人驱动"],
       desc: "用克隆的声音驱动数字人，生成口播画面。",
-      media: [{ id: "dh-clip", type: "video", label: "口播片段", embed: "", src: "" }]
+      panel: { id: "p6-panel", label: "驱动界面", src: "" },
+      results: [{ id: "dh-clip", type: "video", label: "口播片段", embed: "", src: "" }]
     },
     {
       title: "自动化剪辑与发布",
+      short: "剪辑发布",
       tools: ["自研剪辑 skill", "字幕", "B-roll"],
       desc: "自研剪辑 skill 串起自动粗剪、字幕、AI 配音和 B-roll。两个账号的后期剪辑全部由这条流程产出。",
-      media: [{ id: "dh-final", type: "video", label: "成片", embed: "", src: "" }]
+      panel: { id: "p7-panel", label: "剪辑 skill 运行", src: "" },
+      results: [{ id: "dh-final", type: "video", label: "成片", embed: "", src: "" }]
     }
   ],
 

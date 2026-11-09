@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>王炜锋 — AI 视频作品集</title>
-  <meta name="description" content="王炜锋的作品集：AIGC 品牌广告片、拟真数字人制作流程、AI 音乐与视觉短片。" />
+  <meta name="description" content="王炜锋的作品集：AI 创意广告片、拟真数字人、AI 音乐与视觉短片。" />
   <meta name="theme-color" content="#15171A" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,24 +24,27 @@
 
   <a class="skip" href="#ads">跳到作品</a>
 
-  <header class="rail" id="rail">
-    <a class="rail__logo" href="#index" aria-label="回到首页">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20h6l3-9 5 18 4-14 3 8 3-3h8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="bevel"/></svg>
+  <!-- 顶部导航 -->
+  <header class="topbar" id="topbar">
+    <a class="topbar__brand" href="#index" aria-label="回到首页">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20h6l3-9 5 18 4-14 3 8 3-3h8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="bevel"/></svg>
+      <span>王炜锋<small>WANG WEIFENG</small></span>
     </a>
-    <button class="rail__toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
+    <button class="topbar__toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
       <span></span><span></span><span class="sr-only">菜单</span>
     </button>
-    <nav aria-label="主导航">
-      <ul class="rail__nav" id="navList">
-        <li><a href="#index" data-section="index"><b>首页</b><small>Index</small></a></li>
-        <li><a href="#ads" data-section="ads"><b>广告片</b><small>Films</small></a></li>
-        <li><a href="#human" data-section="human"><b>数字人</b><small>Avatar</small></a></li>
-        <li><a href="#more" data-section="more"><b>更多</b><small>More</small></a></li>
-        <li><a href="#about" data-section="about"><b>关于</b><small>About</small></a></li>
-        <li><a href="#contact" data-section="contact"><b>联系</b><small>Contact</small></a></li>
+    <nav class="topbar__nav" aria-label="主导航">
+      <ul id="navList">
+        <li><a href="#ads" data-section="ads"><i>01</i>AI 广告片</a></li>
+        <li><a href="#human" data-section="human"><i>02</i>拟真数字人</a></li>
+        <li><a href="#music" data-section="music"><i>03</i>AI 音乐</a></li>
+        <li><a href="#shorts" data-section="shorts"><i>04</i>视觉短片</a></li>
+        <li class="topbar__sep" aria-hidden="true"></li>
+        <li><a href="#about" data-section="about">关于</a></li>
+        <li><a class="topbar__cta" href="#contact" data-section="contact">联系我</a></li>
       </ul>
     </nav>
-    <div class="rail__meter" aria-hidden="true"><i id="railMeter"></i></div>
+    <div class="topbar__meter" aria-hidden="true"><i id="navMeter"></i></div>
   </header>
 
   <main>
@@ -51,127 +54,195 @@
       <div class="hero__hud" aria-hidden="true">
         <span class="hud hud--tl">CH-01 · 48kHz</span>
         <span class="hud hud--tr" id="hudCoord">X 000 / Y 000</span>
-        <span class="hud hud--br" id="hudFreq">F 440.0 Hz</span>
       </div>
-      <div class="hero__content">
-        <p class="hero__role">AI 视频导演 · AIGC 视听内容创作</p>
-        <h1 class="hero__name" data-text="王炜锋">王炜锋</h1>
-        <p class="hero__latin" aria-hidden="true">WANG WEIFENG</p>
-        <p class="hero__lead">用 AI 生成画面，用声音带动情绪。我做品牌广告片，也做每天都能稳定出片的拟真数字人。</p>
-        <div class="hero__actions">
-          <a class="btn btn--solid" href="#ads">看作品</a>
-          <a class="btn" href="#contact">联系我</a>
+      <div class="wrap hero__wrap">
+        <div class="hero__content">
+          <p class="hero__role">AI 视频制作 · AIGC 视听内容创作</p>
+          <h1 class="hero__name" data-text="王炜锋">王炜锋</h1>
+          <p class="hero__latin" aria-hidden="true">WANG WEIFENG</p>
+          <p class="hero__lead">做过 AI 品牌广告片，也搭过能每天稳定出片的拟真数字人流程。创意、分镜、AI 生成、声音设计都能独立完成。</p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#ads">看作品</a>
+            <a class="btn" href="#contact">联系我</a>
+          </div>
         </div>
+
+        <nav class="index-card" aria-label="作品目录">
+          <p class="index-card__head"><span>作品目录</span><span class="index-card__freq" id="hudFreq">F 440.0 Hz</span></p>
+          <ol>
+            <li><a href="#ads"><i>01</i><b>AI 创意广告片</b><small>EBC 品牌宣传片 · 画面全部 AI 生成</small></a></li>
+            <li><a href="#human"><i>02</i><b>拟真数字人</b><small>2 个抖音财经账号日更 · 粉丝 +50%</small></a></li>
+            <li><a href="#music"><i>03</i><b>AI 音乐</b><small>原创配乐 · 也是片子的声音来源</small></a></li>
+            <li><a href="#shorts"><i>04</i><b>视觉短片</b><small>项目之外的个人创作</small></a></li>
+          </ol>
+        </nav>
       </div>
       <p class="hero__hint" aria-hidden="true">移动鼠标拨动波形 · 点击发出脉冲</p>
     </section>
 
-    <!-- 广告宣传片 -->
+    <!-- 01 广告宣传片 -->
     <section class="section" id="ads" data-section>
-      <div class="section__head">
-        <h2 class="section__title" data-ghost="FILMS">AI 创意广告片</h2>
-        <p class="section__note">画面全部由 AI 生成，创意、脚本、分镜和声音由我完成。</p>
+      <div class="wrap">
+        <header class="section__head">
+          <div>
+            <p class="section__kicker"><i>01</i> FILMS</p>
+            <h2 class="section__title" data-ghost="FILMS">AI 创意广告片</h2>
+          </div>
+          <p class="section__note">画面全部由 AI 生成，创意、脚本、分镜和声音由我完成。</p>
+        </header>
+        <div class="films" id="films"></div>
       </div>
-      <div class="films" id="films"></div>
     </section>
 
-    <!-- 数字人 -->
+    <!-- 02 数字人 -->
     <section class="section human" id="human" data-section>
-      <div class="section__head">
-        <h2 class="section__title" data-ghost="AVATAR">拟真数字人</h2>
-        <p class="section__note">独立负责。为财经短视频账号打造的数字人，解决通用数字人音色同质、语气生硬、口型不自然的问题。</p>
+      <div class="wrap">
+        <header class="section__head">
+          <div>
+            <p class="section__kicker"><i>02</i> AVATAR</p>
+            <h2 class="section__title" data-ghost="AVATAR">拟真数字人</h2>
+          </div>
+          <p class="section__note">独立负责。为财经短视频账号打造的数字人，解决通用数字人音色同质、语气生硬、口型不自然的问题。</p>
+        </header>
+
+        <dl class="spec">
+          <div><dt>训练素材</dt><dd>2 条视频</dd></div>
+          <div><dt>单人训练耗时</dt><dd>3.8 分钟</dd></div>
+          <div><dt>配音中文字错率</dt><dd>3.4%</dd></div>
+          <div><dt>英文抽测字错率</dt><dd>0%</dd></div>
+          <div><dt>落地账号</dt><dd>2 个</dd></div>
+        </dl>
+
+        <div class="human__grid">
+          <div>
+            <h3 class="sub" id="voice-title">声音对比：本人原声 vs 声音克隆 LoRA</h3>
+            <p class="sub__note">同一段文案，先听本人原声，再听 LoRA 生成的声音。</p>
+            <div class="voices" id="voices" aria-labelledby="voice-title"></div>
+          </div>
+          <div>
+            <h3 class="sub">账号成果</h3>
+            <p class="sub__note">数字人上线后的账号数据。</p>
+            <div class="accounts" id="accounts"></div>
+          </div>
+        </div>
+
+        <h3 class="sub" id="pipe-title">从素材到成片：7 步产出流程</h3>
+        <p class="sub__note">点击步骤，查看每一步的操作面板和产出效果。也可以用键盘左右方向键切换。</p>
+        <div class="flow" id="flow" aria-labelledby="pipe-title"></div>
       </div>
-
-      <dl class="spec">
-        <div><dt>训练素材</dt><dd>2 条视频</dd></div>
-        <div><dt>单人训练耗时</dt><dd>3.8 分钟</dd></div>
-        <div><dt>配音中文字错率</dt><dd>3.4%</dd></div>
-        <div><dt>英文抽测字错率</dt><dd>0%</dd></div>
-        <div><dt>落地账号</dt><dd>2 个</dd></div>
-      </dl>
-
-      <h3 class="sub" id="voice-title">声音对比：本人原声 vs 声音克隆 LoRA</h3>
-      <p class="sub__note">同一段文案，先听本人原声，再听 LoRA 生成的声音。</p>
-      <div class="voices" id="voices" aria-labelledby="voice-title"></div>
-
-      <h3 class="sub" id="pipe-title">从素材到成片的产出流程</h3>
-      <p class="sub__note">每一步都可以点开看过程素材。</p>
-      <ol class="pipeline" id="pipeline" aria-labelledby="pipe-title"></ol>
-
-      <h3 class="sub">账号成果</h3>
-      <div class="accounts" id="accounts"></div>
     </section>
 
-    <!-- 音乐 + 短片 -->
-    <section class="section more" id="more" data-section>
-      <div class="more__grid">
-        <div>
-          <div class="section__head section__head--tight">
-            <h2 class="section__title section__title--sm" data-ghost="MUSIC">AI 音乐</h2>
+    <!-- 03 AI 音乐 -->
+    <section class="section" id="music" data-section>
+      <div class="wrap">
+        <header class="section__head">
+          <div>
+            <p class="section__kicker"><i>03</i> MUSIC</p>
+            <h2 class="section__title" data-ghost="MUSIC">AI 音乐</h2>
           </div>
           <p class="section__note">自己用 AI 创作的音乐，也是我做片子时的配乐来源。</p>
-          <div class="tracks" role="table" aria-label="AI 音乐列表">
-            <div id="trackList" role="rowgroup"></div>
-          </div>
+        </header>
+        <div class="tracks" role="table" aria-label="AI 音乐列表">
+          <div id="trackList" role="rowgroup"></div>
         </div>
-        <div>
-          <div class="section__head section__head--tight">
-            <h2 class="section__title section__title--sm" data-ghost="SHORTS">视觉短片</h2>
+      </div>
+    </section>
+
+    <!-- 04 视觉短片 -->
+    <section class="section" id="shorts" data-section>
+      <div class="wrap">
+        <header class="section__head">
+          <div>
+            <p class="section__kicker"><i>04</i> SHORTS</p>
+            <h2 class="section__title" data-ghost="SHORTS">视觉短片</h2>
           </div>
           <p class="section__note">项目之外的个人创作。</p>
-          <div class="shorts" id="shorts"></div>
-        </div>
+        </header>
+        <div class="shorts" id="shortList"></div>
       </div>
     </section>
 
     <!-- 关于 -->
     <section class="section about" id="about" data-section>
-      <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
-      <div class="about__grid">
-        <div class="about__portrait">
-          <img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" />
-          <dl class="about__id">
-            <div><dt>姓名</dt><dd>王炜锋</dd></div>
-            <div><dt>求职方向</dt><dd>AI 视频生成 / AIGC</dd></div>
-            <div><dt>学校</dt><dd>上海师范大学天华学院</dd></div>
-            <div><dt>专业</dt><dd>音乐教育 / 计算机科学与技术</dd></div>
-            <div><dt>本科</dt><dd>2021 – 2025</dd></div>
-          </dl>
-        </div>
-        <div class="about__text">
-          <p class="about__lead">我是 AIGC 视频创作者，从创意、脚本分镜、AI 生成到声音设计，整条流程都自己做。</p>
-          <p>音乐教育和计算机的双背景，让我习惯用配乐、音效和语音节奏去驱动画面情绪，也能自己搭训练流程和剪辑工具，把一次性的创作变成可以反复生产的方案。</p>
+      <div class="wrap">
+        <header class="section__head">
+          <div>
+            <p class="section__kicker">ABOUT</p>
+            <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
+          </div>
+        </header>
+        <div class="about__grid">
+          <div class="about__portrait">
+            <img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" />
+            <dl class="about__id">
+              <div><dt>姓名</dt><dd>王炜锋</dd></div>
+              <div><dt>求职方向</dt><dd>AI 视频生成 / AIGC</dd></div>
+              <div><dt>学校</dt><dd>上海师范大学天华学院</dd></div>
+              <div><dt>专业</dt><dd>音乐教育 / 计算机科学与技术</dd></div>
+              <div><dt>本科</dt><dd>2021 – 2025</dd></div>
+            </dl>
+          </div>
 
-          <h3 class="about__sub">专业技能</h3>
-          <dl class="skills">
-            <div><dt>AI 视频</dt><dd>即梦、LibTV、TapNow、Seedance；文生视频、图生视频、数字人驱动</dd></div>
-            <div><dt>AI 图像</dt><dd>Midjourney、Nano Banana 2、Stable Diffusion；用提示词迭代和参考图约束保持角色与风格一致</dd></div>
-            <div><dt>AI 数字人</dt><dd>IndexTTS 2.5 声音克隆 LoRA 微调、唇周 LoRA 训练、情感控制、人声分离、Whisper 转写与质检</dd></div>
-            <div><dt>声音设计</dt><dd>配乐选择、音效设计、混音</dd></div>
-            <div><dt>后期制作</dt><dd>Premiere Pro、After Effects、剪映、Photoshop；剪辑、LOG 素材调色、字幕与包装</dd></div>
-          </dl>
+          <div class="about__main">
+            <p class="about__tag">求职方向：AI 视频生成 · AIGC 视听内容</p>
+            <p class="about__lead">能独立交付 AI 品牌广告片，也能把数字人做成每天稳定产出的生产线。</p>
+            <p class="about__text">负责过 EBC Financial Group 的 AIGC 品牌宣传片，包括创意、脚本、分镜和全片声音设计。独立搭建拟真数字人流程，支撑 2 个抖音财经账号的日常更新，其中「交易员cool」在参与期间粉丝从 6 万涨到 9 万。音乐教育和计算机双专业：配乐、音效自己做，训练流程和剪辑工具也自己搭。</p>
 
-          <h3 class="about__sub">经历</h3>
-          <ol class="timeline">
-            <li><span class="timeline__role">独立负责</span><span>AI 拟真数字人制作，落地 2 个抖音财经账号的日常生产</span></li>
-            <li><span class="timeline__role">创意 · 编剧 · 声音</span><span>EBC Financial Group AIGC 品牌广告宣传片</span></li>
-            <li><span class="timeline__role">编导 · 自动化剪辑</span><span>抖音财经账号「交易员cool」「Jimmy的美金日记」内容制作</span></li>
-          </ol>
+            <ul class="facts">
+              <li><b>2 个</b><span>财经账号日更落地</span></li>
+              <li><b>+50%</b><span>交易员cool 参与期间粉丝增长</span></li>
+              <li><b>3.8 分钟</b><span>训练一位新说话人的声音</span></li>
+              <li><b>全流程</b><span>创意 · 分镜 · AI 生成 · 声音</span></li>
+            </ul>
+
+            <h3 class="about__sub">经历</h3>
+            <ol class="timeline">
+              <li><span class="timeline__role">独立负责</span><span>AI 拟真数字人制作，落地 2 个抖音财经账号的日常生产</span></li>
+              <li><span class="timeline__role">创意 · 编剧 · 声音</span><span>EBC Financial Group AIGC 品牌广告宣传片</span></li>
+              <li><span class="timeline__role">编导 · 自动化剪辑</span><span>抖音财经账号「交易员cool」「Jimmy的美金日记」内容制作</span></li>
+            </ol>
+          </div>
+
+          <div class="about__side">
+            <h3 class="about__sub about__sub--first">专业技能</h3>
+            <dl class="skills">
+              <div><dt>AI 视频</dt><dd>即梦、LibTV、TapNow、Seedance；文生视频、图生视频、数字人驱动</dd></div>
+              <div><dt>AI 图像</dt><dd>Midjourney、Nano Banana 2、Stable Diffusion；用提示词迭代和参考图约束保持角色与风格一致</dd></div>
+              <div><dt>AI 数字人</dt><dd>IndexTTS 2.5 声音克隆 LoRA 微调、唇周 LoRA 训练、情感控制、人声分离、Whisper 转写与质检</dd></div>
+              <div><dt>声音设计</dt><dd>配乐选择、音效设计、混音</dd></div>
+              <div><dt>后期制作</dt><dd>Premiere Pro、After Effects、剪映、Photoshop；剪辑、LOG 素材调色、字幕与包装</dd></div>
+            </dl>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 联系 -->
     <section class="section contact" id="contact" data-section>
-      <h2 class="section__title" data-ghost="CONTACT">联系</h2>
-      <p class="contact__lead">正在找 AI 视频生成、AIGC 视听内容创作方向的工作，欢迎发邮件聊。</p>
-      <a class="contact__mail" href="mailto:w2240994753@163.com">w2240994753@163.com</a>
+      <div class="wrap contact__wrap">
+        <div>
+          <p class="section__kicker">CONTACT</p>
+          <h2 class="section__title" data-ghost="CONTACT">联系</h2>
+          <p class="contact__lead">正在找 AI 视频生成、AIGC 视听内容创作方向的工作，欢迎发邮件聊。</p>
+        </div>
+        <div class="copybox">
+          <span class="copybox__label">邮箱</span>
+          <span class="copybox__value" id="mailText">w2240994753@163.com</span>
+          <button class="copybox__btn" id="copyMail" type="button" data-copy="w2240994753@163.com" aria-live="polite">
+            <svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h11v11H9z M5 15H4V4h11v1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <svg class="i-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            <span>复制</span>
+          </button>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© <span id="year"></span> 王炜锋</span>
-    <a href="#index">回到顶部</a>
+    <div class="wrap footer__wrap">
+      <span>© <span id="year"></span> 王炜锋</span>
+      <a href="#index">回到顶部</a>
+    </div>
   </footer>
 
   <!-- 底部播放器 -->
