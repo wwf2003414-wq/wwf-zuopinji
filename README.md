@@ -17,8 +17,8 @@ AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安
 | 版块 | 字段 | 填什么 |
 | --- | --- | --- |
 | 广告片 `ads` | `embed` 或 `src`、`cover` | B 站嵌入链接或本地视频；封面图 |
-| 声音对比 `voices` | `original.src`、`lora.src`、`text` | 本人原声、LoRA 生成音频、对应文案 |
-| 产出流程 `pipeline` | 每一步的 `panel.src`、`results` | `panel`：操作面板截图；`results`：效果，可放多个（会出现切换按钮），`type` 为 `video` / `image` / `audio` |
+| 声音对比 `voices` | `clips`（每条 `kind`、`label`、`src`）、`text` | `kind` 为 `real`（真人）或 `ai`（AI 生成），`label` 是按钮文字 |
+| 产出流程 `pipeline` | 每一步的 `panel`、`results` | `panel`：操作面板截图，或 `type: "text"` 的文字说明；`results`：效果，可放多个（会出现切换按钮），`type` 为 `video` / `image` / `audio` |
 | AI 音乐 `music` | `src`、`title`、`subtitle`、`duration` | 音频文件和信息 |
 | 视觉短片 `shorts` | `embed` 或 `src`、`cover`、`note` | 视频和一句话介绍 |
 

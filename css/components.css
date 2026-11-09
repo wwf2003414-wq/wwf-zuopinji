@@ -59,7 +59,7 @@
 .voice__text { margin: 8px 0 16px; color: rgba(230,226,216,.7); font-size: var(--t-sm); }
 .voice__rows { display: grid; gap: 8px; }
 .voice__row {
-  display: grid; grid-template-columns: 36px 76px minmax(0, 1fr); align-items: center; gap: 12px;
+  display: grid; grid-template-columns: 36px minmax(64px, auto) minmax(0, 1fr) auto; align-items: center; gap: 12px;
   width: 100%; padding: 8px 12px 8px 8px; border: 1px solid transparent; background: var(--graphite);
   cursor: pointer; text-align: left;
 }
@@ -152,13 +152,24 @@
   position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; padding: 0;
   background: var(--graphite); border: 1px solid var(--line); overflow: hidden;
 }
-.flow__frame--shot { cursor: zoom-in; }
-.flow__frame--shot:hover, .flow__zoom:hover { border-color: var(--amber); }
+.flow__frame:has(> .flow__zoom:hover) { border-color: var(--amber); }
+.flow__frame--shot .flow__zoom { cursor: zoom-in; }
+.flow__frame--shot.is-text { aspect-ratio: auto; min-height: 100%; padding: 22px 24px; border-left: 2px solid var(--cyan); }
+.flow__textlabel { margin: 0 0 14px; font-weight: 700; font-size: var(--t-lg); }
+.flow__points { list-style: none; margin: 0; padding: 0; counter-reset: pt; display: grid; gap: 14px; }
+.flow__points li { counter-increment: pt; display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 10px; font-size: var(--t-sm); }
+.flow__points li::before { content: counter(pt, decimal-leading-zero); grid-row: 1 / 3; font-family: var(--f-latin); font-weight: 600; color: var(--cyan); }
+.flow__points b { font-weight: 700; color: var(--bone); }
+.flow__points span { color: rgba(230,226,216,.75); line-height: 1.7; }
+.voice__dur { font-family: var(--f-latin); font-size: var(--t-xs); color: var(--ash); }
 .flow__frame canvas, .flow__frame img, .flow__frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .flow__frame video { object-fit: contain; background: #000; }
 .flow__frame--result { display: grid; place-items: center; }
+.flow__frame--result > video { position: absolute; inset: 0; }
+.flow__frame--result.is-portrait { aspect-ratio: 3 / 4; }
 .flow__zoom { position: absolute; inset: 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.flow__frame--result .flow__audio { width: calc(100% - 32px); }
+.flow__frame--result .flow__audio { width: calc(100% - 32px); grid-template-columns: 36px minmax(0, 1fr); row-gap: 10px; padding: 12px; }
+.flow__frame--result .flow__audio .voice__wave { grid-column: 1 / -1; height: 56px; }
 
 .flow__panel.is-enter .flow__info,
 .flow__panel.is-enter .flow__shot,

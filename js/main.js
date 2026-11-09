@@ -151,23 +151,27 @@
         <p class="voice__text">${esc(v.text)}</p>
         <div class="voice__rows"></div>`;
       const rows = $(".voice__rows", el);
-      [
-        ["original", "本人原声", "230,226,216"],
-        ["lora", "LoRA 生成", "92,200,214"]
-      ].forEach(([key, label, accent]) => {
-        const clip = v[key] || {};
-        const id = `${v.id}-${key}`;
+      const clips = v.clips || [
+        { kind: "real", label: "本人原声", ...(v.original || {}) },
+        { kind: "ai", label: "LoRA 生成", ...(v.lora || {}) }
+      ];
+      clips.forEach((clip, k) => {
+        const ai = clip.kind === "ai";
+        const label = clip.label;
+        const accent = ai ? "92,200,214" : "230,226,216";
+        const id = `${v.id}-${k}`;
         const row = document.createElement("button");
         row.type = "button";
-        row.className = `voice__row voice__row--${key}`;
+        row.className = `voice__row voice__row--${ai ? "lora" : "original"}`;
         row.dataset.id = id;
-        row.innerHTML = `<span class="voice__play">${ICON_PLAY}</span><span class="voice__label">${label}</span>`;
+        row.innerHTML = `<span class="voice__play">${ICON_PLAY}</span><span class="voice__label">${esc(label)}</span>`;
         row.appendChild(waveBars(id, accent));
+        if (clip.duration) row.insertAdjacentHTML("beforeend", `<span class="voice__dur">${esc(clip.duration)}</span>`);
         row.setAttribute("aria-label", `播放${v.speaker}${label}`);
         row.addEventListener("click", () =>
           window.Player.play({
             id, title: `${v.speaker} · ${label}`, subtitle: v.account,
-            src: clip.src, demo: clip.demo, duration: "0:12"
+            src: clip.src, demo: clip.demo, duration: clip.duration || "0:12"
           })
         );
         rows.appendChild(row);
@@ -204,7 +208,7 @@
         </div>
         <figure class="flow__shot">
           <figcaption><span>操作面板</span><em class="flow__shotlabel"></em></figcaption>
-          <button class="flow__frame flow__frame--shot" type="button"></button>
+          <div class="flow__frame flow__frame--shot"></div>
         </figure>
         <figure class="flow__result">
           <figcaption><span>产出效果</span><span class="flow__switch" role="group" aria-label="切换效果"></span></figcaption>
@@ -222,19 +226,30 @@
     function fillShot(s) {
       const p = s.panel || { id: `p-${cur}`, label: "操作面板" };
       shotFrame.innerHTML = "";
-      if (p.src) { const img = new Image(); img.src = p.src; img.alt = `${s.title} 操作面板`; shotFrame.appendChild(img); }
-      else {
-        shotFrame.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "92,200,214", play: false }));
-        shotFrame.insertAdjacentHTML("beforeend", '<span class="pending">待上传截图</span>');
-      }
+      shotFrame.classList.toggle("is-text", p.type === "text");
+      $(".flow__shot figcaption > span", box).textContent = p.type === "text" ? "文字说明" : "操作面板";
       $(".flow__shotlabel", box).textContent = p.label || "";
-      shotFrame.setAttribute("aria-label", `放大查看：${s.title} 操作面板`);
-      shotFrame.onclick = () => openMedia({ ...p, type: "image" }, `${s.title} · ${p.label || "操作面板"}`);
+      if (p.type === "text") {
+        shotFrame.innerHTML = `<p class="flow__textlabel">${esc(p.label || "")}</p><ol class="flow__points">${(p.points || []).map(([k, t]) => `<li><b>${esc(k)}</b><span>${esc(t)}</span></li>`).join("")}</ol>`;
+        $(".flow__shotlabel", box).textContent = "";
+        return;
+      }
+      const zoom = document.createElement("button");
+      zoom.type = "button"; zoom.className = "flow__zoom";
+      zoom.setAttribute("aria-label", `放大查看：${s.title} 操作面板`);
+      if (p.src) { const img = new Image(); img.src = p.src; img.alt = `${s.title} 操作面板`; zoom.appendChild(img); }
+      else {
+        zoom.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "92,200,214", play: false }));
+        zoom.insertAdjacentHTML("beforeend", '<span class="pending">待上传截图</span>');
+      }
+      zoom.addEventListener("click", () => openMedia({ ...p, type: "image" }, `${s.title} · ${p.label || "操作面板"}`));
+      shotFrame.appendChild(zoom);
     }
 
     function fillResult(s, k) {
       const r = (s.results || [])[k];
       resFrame.innerHTML = "";
+      resFrame.classList.remove("is-portrait");
       $$(".flow__chip", sw).forEach((b, j) => b.setAttribute("aria-pressed", j === k));
       if (!r) return;
       const title = `${s.title} · ${r.label}`;
@@ -251,6 +266,7 @@
         const v = document.createElement("video");
         v.src = r.src; v.controls = true; v.playsInline = true; v.preload = "metadata";
         if (r.cover) v.poster = r.cover;
+        v.addEventListener("loadedmetadata", () => resFrame.classList.toggle("is-portrait", v.videoHeight > v.videoWidth * 1.2));
         resFrame.appendChild(v);
       } else if (r.type === "image" && r.src) {
         const b = document.createElement("button");
