@@ -166,6 +166,14 @@
         row.dataset.id = id;
         row.innerHTML = `<span class="voice__play">${ICON_PLAY}</span><span class="voice__label">${esc(label)}</span>`;
         row.appendChild(waveBars(id, accent));
+        if (!clip.src) {
+          // 还没上传的音频：显示「待上传」，不播放示例音，免得把合成音当成 AI 声音
+          row.disabled = true;
+          row.insertAdjacentHTML("beforeend", '<span class="voice__tag">待上传</span>');
+          row.setAttribute("aria-label", `${v.speaker}${label}，待上传`);
+          rows.appendChild(row);
+          return;
+        }
         if (clip.duration) row.insertAdjacentHTML("beforeend", `<span class="voice__dur">${esc(clip.duration)}</span>`);
         row.setAttribute("aria-label", `播放${v.speaker}${label}`);
         row.addEventListener("click", () =>
@@ -409,35 +417,76 @@
   }
   document.addEventListener("player:change", (e) => syncPlaying(e.detail));
 
-  /* ---------- 导航高亮 + 顶部进度条 ---------- */
-  const links = $$(".topbar__nav a[data-section]");
-  const meter = $("#navMeter");
+  /* ---------- 导航高亮 + 进度 ---------- */
   const topbar = $("#topbar");
+  const navList = $("#navList");
+  const links = $$("#topbar a[data-section]");
+  let curSection = "";
+  // 左侧刻度线的琥珀色进度：填到当前版块那个节点
+  function fillTo(id) {
+    if (id === "contact") { navList.style.setProperty("--fill", navList.offsetHeight + "px"); return; }
+    const a = $(`#navList a[data-section="${id}"]`);
+    const node = a && $(".rail__node", a);
+    const px = node ? node.getBoundingClientRect().top - navList.getBoundingClientRect().top + node.offsetHeight / 2 : 0;
+    navList.style.setProperty("--fill", Math.max(0, px) + "px");
+  }
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
-      if (en.isIntersecting) links.forEach((a) => a.classList.toggle("is-active", a.dataset.section === en.target.id));
+      if (!en.isIntersecting) return;
+      curSection = en.target.id;
+      links.forEach((a) => a.classList.toggle("is-active", a.dataset.section === curSection));
+      fillTo(curSection); // 到了「联系」会把刻度线填满
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   $$("[data-section]").filter((s) => s.id).forEach((s) => io.observe(s));
   function onScroll() {
     const max = document.documentElement.scrollHeight - innerHeight;
-    meter.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
-    topbar.classList.toggle("is-scrolled", scrollY > 40);
+    topbar.style.setProperty("--p", (max > 0 ? (scrollY / max) * 100 : 0) + "%");
   }
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
   /* ---------- 手机端菜单 ---------- */
-  const toggle = $("#navToggle"), navList = $("#navList");
-  toggle.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") !== "true";
+  const toggle = $("#navToggle");
+  function setMenu(open) {
     toggle.setAttribute("aria-expanded", open);
-    navList.classList.toggle("is-open", open);
-  });
-  links.forEach((a) => a.addEventListener("click", () => {
-    toggle.setAttribute("aria-expanded", "false");
-    navList.classList.remove("is-open");
-  }));
+    topbar.classList.toggle("is-open", open);
+    // 菜单收起时量不到位置，打开后再填一次进度
+    if (open && curSection) fillTo(curSection);
+  }
+  toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
+  links.forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  // 从手机宽度拉回桌面宽度时，重新对齐进度
+  addEventListener("resize", () => { if (curSection) fillTo(curSection); });
+
+  /* ---------- 下载简历 ----------
+     data.js 里 SITE.resume.src 填了文件路径就直接下载；
+     还没填时点击只给出提示，不跳转 */
+  function setupResume() {
+    const btn = $("#resumeBtn"), status = $("#resumeStatus");
+    if (!btn) return;
+    const r = site.resume || {};
+    if (r.meta) $(".resume__meta", btn).textContent = r.meta;
+    if (r.src) {
+      btn.href = r.src;
+      btn.setAttribute("download", r.filename || "");
+      btn.removeAttribute("role");
+      return;
+    }
+    let timer = 0;
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      clearTimeout(timer);
+      btn.classList.add("is-pending");
+      $(".resume__label", btn).textContent = "简历更新中";
+      status.textContent = "新版简历整理好后会放在这里，可以先发邮件索取。";
+      timer = setTimeout(() => {
+        btn.classList.remove("is-pending");
+        $(".resume__label", btn).textContent = "下载简历";
+        status.textContent = "";
+      }, 3200);
+    });
+  }
 
   renderFilms();
   renderVoices();
@@ -446,4 +495,5 @@
   renderTracks();
   renderShorts();
   setupCopy();
+  setupResume();
 })();

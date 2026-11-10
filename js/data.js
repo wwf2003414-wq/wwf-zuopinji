@@ -11,6 +11,10 @@
             留空时播放浏览器自动生成的示例音，只用于看效果
    ============================================================ */
 window.SITE = {
+  /* ---------- 下载简历（「关于我」照片下方的按钮） ----------
+     src 留空：按钮可以点，但只提示「简历更新中」
+     放好 PDF 后填上路径，例如 src: "assets/王炜锋-简历.pdf"，按钮就会直接下载 */
+  resume: { src: "", filename: "王炜锋-简历.pdf", meta: "PDF · 一页" },
   /* ---------- AI 创意广告宣传片 ---------- */
   ads: [
     {
@@ -58,10 +62,11 @@ window.SITE = {
       id: "spk-b",
       speaker: "说话人 B",
       account: "Jimmy的美金日记",
-      text: "两段都是 Jimmy 本人的历史口播原声，是训练这个说话人模型用的素材样例。",
+      text: "先听 Jimmy 历史口播里的一段原声，再听 AI 用克隆声音念一段全新的文案。",
       clips: [
-        { kind: "real", label: "原声样例 1", src: "assets/media/jimmy-real-1.mp3", duration: "0:30" },
-        { kind: "real", label: "原声样例 2", src: "assets/media/jimmy-real-2.mp3", duration: "0:30" }
+        { kind: "real", label: "本人原声", src: "assets/media/jimmy-real-1.mp3", duration: "0:30" },
+        // AI 版还没有上传：把文件放进 assets/media/ 后填上 src，例如 "assets/media/jimmy-ai.mp3"
+        { kind: "ai", label: "AI 生成", src: "", duration: "" }
       ]
     }
   ],

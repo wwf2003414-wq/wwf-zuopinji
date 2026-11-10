@@ -24,27 +24,27 @@
 
   <a class="skip" href="#ads">跳到作品</a>
 
-  <!-- 顶部导航 -->
-  <header class="topbar" id="topbar">
-    <a class="topbar__brand" href="#index" aria-label="回到首页">
+  <!-- 左侧导航：桌面端固定在左边、垂直居中；手机端变成顶部栏 -->
+  <header class="rail" id="topbar">
+    <a class="rail__brand" href="#index" aria-label="回到首页">
       <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20h6l3-9 5 18 4-14 3 8 3-3h8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="bevel"/></svg>
       <span>王炜锋<small>WANG WEIFENG</small></span>
     </a>
-    <button class="topbar__toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
+    <button class="rail__toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
       <span></span><span></span><span class="sr-only">菜单</span>
     </button>
-    <nav class="topbar__nav" aria-label="主导航">
-      <ul id="navList">
-        <li><a href="#ads" data-section="ads"><i>01</i>AI 广告片</a></li>
-        <li><a href="#human" data-section="human"><i>02</i>拟真数字人</a></li>
-        <li><a href="#music" data-section="music"><i>03</i>AI 音乐</a></li>
-        <li><a href="#shorts" data-section="shorts"><i>04</i>视觉短片</a></li>
-        <li class="topbar__sep" aria-hidden="true"></li>
-        <li><a href="#about" data-section="about">关于</a></li>
-        <li><a class="topbar__cta" href="#contact" data-section="contact">联系我</a></li>
+    <nav class="rail__nav" aria-label="主导航">
+      <ul class="rail__list" id="navList">
+        <li><a href="#about" data-section="about"><b class="rail__node" aria-hidden="true"></b><i aria-hidden="true"></i><span>关于我</span></a></li>
+        <li class="rail__gap" aria-hidden="true"></li>
+        <li><a href="#ads" data-section="ads"><b class="rail__node" aria-hidden="true"></b><i>01</i><span>AI 广告片</span></a></li>
+        <li><a href="#human" data-section="human"><b class="rail__node" aria-hidden="true"></b><i>02</i><span>拟真数字人</span></a></li>
+        <li><a href="#music" data-section="music"><b class="rail__node" aria-hidden="true"></b><i>03</i><span>AI 音乐</span></a></li>
+        <li><a href="#shorts" data-section="shorts"><b class="rail__node" aria-hidden="true"></b><i>04</i><span>视觉短片</span></a></li>
       </ul>
+      <a class="rail__cta" href="#contact" data-section="contact">联系我</a>
     </nav>
-    <div class="topbar__meter" aria-hidden="true"><i id="navMeter"></i></div>
+    <div class="rail__meter" aria-hidden="true"><i></i></div>
   </header>
 
   <main>
@@ -78,6 +78,71 @@
         </nav>
       </div>
       <p class="hero__hint" aria-hidden="true">移动鼠标拨动波形 · 点击发出脉冲</p>
+    </section>
+
+    <!-- 关于 -->
+    <section class="section about" id="about" data-section>
+      <div class="wrap">
+        <header class="section__head">
+          <div>
+            <p class="section__kicker">ABOUT</p>
+            <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
+          </div>
+        </header>
+        <div class="about__grid">
+          <div class="about__portrait">
+            <img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" />
+            <dl class="about__id">
+              <div><dt>姓名</dt><dd>王炜锋</dd></div>
+              <div><dt>求职方向</dt><dd>AI 视频生成 / AIGC</dd></div>
+              <div><dt>学校</dt><dd>上海师范大学天华学院</dd></div>
+              <div><dt>专业</dt><dd>音乐教育 / 计算机科学与技术</dd></div>
+              <div><dt>本科</dt><dd>2021 – 2025</dd></div>
+            </dl>
+            <a class="resume" id="resumeBtn" href="#" role="button">
+              <span class="resume__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 17v3h16v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="bevel"/></svg>
+              </span>
+              <span class="resume__text">
+                <b class="resume__label">下载简历</b>
+                <small class="resume__meta">PDF · 一页</small>
+              </span>
+            </a>
+            <p class="resume__status" id="resumeStatus" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="about__main">
+            <p class="about__tag">求职方向：AI 视频生成 · AIGC 视听内容</p>
+            <p class="about__lead">能独立交付 AI 品牌广告片，也能把数字人做成每天稳定产出的生产线。</p>
+            <p class="about__text">负责过 EBC Financial Group 的 AIGC 品牌宣传片，包括创意、脚本、分镜和全片声音设计。独立搭建拟真数字人流程，支撑 2 个抖音财经账号的日常更新，其中「交易员cool」在参与期间粉丝从 6 万涨到 9 万。音乐教育和计算机双专业：配乐、音效自己做，训练流程和剪辑工具也自己搭。</p>
+
+            <ul class="facts">
+              <li><b>2 个</b><span>财经账号日更落地</span></li>
+              <li><b>+50%</b><span>交易员cool 参与期间粉丝增长</span></li>
+              <li><b>3.8 分钟</b><span>训练一位新说话人的声音</span></li>
+              <li><b>全流程</b><span>创意 · 分镜 · AI 生成 · 声音</span></li>
+            </ul>
+
+            <h3 class="about__sub">经历</h3>
+            <ol class="timeline">
+              <li><span class="timeline__role">独立负责</span><span>AI 拟真数字人制作，落地 2 个抖音财经账号的日常生产</span></li>
+              <li><span class="timeline__role">创意 · 编剧 · 声音</span><span>EBC Financial Group AIGC 品牌广告宣传片</span></li>
+              <li><span class="timeline__role">编导 · 自动化剪辑</span><span>抖音财经账号「交易员cool」「Jimmy的美金日记」内容制作</span></li>
+            </ol>
+          </div>
+
+          <div class="about__side">
+            <h3 class="about__sub about__sub--first">专业技能</h3>
+            <dl class="skills">
+              <div><dt>AI 视频</dt><dd>即梦、LibTV、TapNow、Seedance；文生视频、图生视频、数字人驱动</dd></div>
+              <div><dt>AI 图像</dt><dd>Midjourney、Nano Banana 2、Stable Diffusion；用提示词迭代和参考图约束保持角色与风格一致</dd></div>
+              <div><dt>AI 数字人</dt><dd>IndexTTS 2.5 声音克隆 LoRA 微调、唇周 LoRA 训练、情感控制、人声分离、Whisper 转写与质检</dd></div>
+              <div><dt>声音设计</dt><dd>配乐选择、音效设计、混音</dd></div>
+              <div><dt>后期制作</dt><dd>Premiere Pro、After Effects、剪映、Photoshop；剪辑、LOG 素材调色、字幕与包装</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 01 广告宣传片 -->
@@ -148,72 +213,15 @@
       </div>
     </section>
 
-    <!-- 04 视觉短片 -->
-    <section class="section" id="shorts" data-section>
-      <div class="wrap">
-        <header class="section__head">
-          <div>
-            <p class="section__kicker"><i>04</i> SHORTS</p>
-            <h2 class="section__title" data-ghost="SHORTS">视觉短片</h2>
-          </div>
+    <!-- 04 视觉短片：标题在左，两支短片在右，轻量带过 -->
+    <section class="section shorts-sec" id="shorts" data-section>
+      <div class="wrap shorts-sec__wrap">
+        <header class="shorts-sec__head">
+          <p class="section__kicker"><i>04</i> SHORTS</p>
+          <h2 class="section__title" data-ghost="SHORTS">视觉短片</h2>
           <p class="section__note">项目之外的个人创作。</p>
         </header>
         <div class="shorts" id="shortList"></div>
-      </div>
-    </section>
-
-    <!-- 关于 -->
-    <section class="section about" id="about" data-section>
-      <div class="wrap">
-        <header class="section__head">
-          <div>
-            <p class="section__kicker">ABOUT</p>
-            <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
-          </div>
-        </header>
-        <div class="about__grid">
-          <div class="about__portrait">
-            <img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" />
-            <dl class="about__id">
-              <div><dt>姓名</dt><dd>王炜锋</dd></div>
-              <div><dt>求职方向</dt><dd>AI 视频生成 / AIGC</dd></div>
-              <div><dt>学校</dt><dd>上海师范大学天华学院</dd></div>
-              <div><dt>专业</dt><dd>音乐教育 / 计算机科学与技术</dd></div>
-              <div><dt>本科</dt><dd>2021 – 2025</dd></div>
-            </dl>
-          </div>
-
-          <div class="about__main">
-            <p class="about__tag">求职方向：AI 视频生成 · AIGC 视听内容</p>
-            <p class="about__lead">能独立交付 AI 品牌广告片，也能把数字人做成每天稳定产出的生产线。</p>
-            <p class="about__text">负责过 EBC Financial Group 的 AIGC 品牌宣传片，包括创意、脚本、分镜和全片声音设计。独立搭建拟真数字人流程，支撑 2 个抖音财经账号的日常更新，其中「交易员cool」在参与期间粉丝从 6 万涨到 9 万。音乐教育和计算机双专业：配乐、音效自己做，训练流程和剪辑工具也自己搭。</p>
-
-            <ul class="facts">
-              <li><b>2 个</b><span>财经账号日更落地</span></li>
-              <li><b>+50%</b><span>交易员cool 参与期间粉丝增长</span></li>
-              <li><b>3.8 分钟</b><span>训练一位新说话人的声音</span></li>
-              <li><b>全流程</b><span>创意 · 分镜 · AI 生成 · 声音</span></li>
-            </ul>
-
-            <h3 class="about__sub">经历</h3>
-            <ol class="timeline">
-              <li><span class="timeline__role">独立负责</span><span>AI 拟真数字人制作，落地 2 个抖音财经账号的日常生产</span></li>
-              <li><span class="timeline__role">创意 · 编剧 · 声音</span><span>EBC Financial Group AIGC 品牌广告宣传片</span></li>
-              <li><span class="timeline__role">编导 · 自动化剪辑</span><span>抖音财经账号「交易员cool」「Jimmy的美金日记」内容制作</span></li>
-            </ol>
-          </div>
-
-          <div class="about__side">
-            <h3 class="about__sub about__sub--first">专业技能</h3>
-            <dl class="skills">
-              <div><dt>AI 视频</dt><dd>即梦、LibTV、TapNow、Seedance；文生视频、图生视频、数字人驱动</dd></div>
-              <div><dt>AI 图像</dt><dd>Midjourney、Nano Banana 2、Stable Diffusion；用提示词迭代和参考图约束保持角色与风格一致</dd></div>
-              <div><dt>AI 数字人</dt><dd>IndexTTS 2.5 声音克隆 LoRA 微调、唇周 LoRA 训练、情感控制、人声分离、Whisper 转写与质检</dd></div>
-              <div><dt>声音设计</dt><dd>配乐选择、音效设计、混音</dd></div>
-              <div><dt>后期制作</dt><dd>Premiere Pro、After Effects、剪映、Photoshop；剪辑、LOG 素材调色、字幕与包装</dd></div>
-            </dl>
-          </div>
-        </div>
       </div>
     </section>
 
