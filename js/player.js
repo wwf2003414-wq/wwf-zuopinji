@@ -15,6 +15,12 @@
   let current = null;
   let actx = null, analyser = null, buf = null, seeking = false, raf = 0;
 
+  // 双击 index.html 打开（file://）时，浏览器把每个本地文件当成不同来源：
+  // 带 crossorigin 的音频会被拒绝加载，接入 Web Audio 后也会被静音。
+  // 所以本地打开时不走 Web Audio，示波器改成模拟波形；部署到网站后自动用真实波形。
+  const isFile = location.protocol === "file:";
+  if (isFile) audio.removeAttribute("crossorigin");
+
   const fmt = (s) => {
     if (!isFinite(s)) return "0:00";
     const m = Math.floor(s / 60), r = Math.floor(s % 60);
@@ -22,7 +28,7 @@
   };
 
   function ensureGraph() {
-    if (actx) return;
+    if (actx || isFile) return;
     try {
       actx = new (window.AudioContext || window.webkitAudioContext)();
       const src = actx.createMediaElementSource(audio);
@@ -52,6 +58,19 @@
         const x = (i / (buf.length - 1)) * w;
         const y = (buf[i] / 255) * h;
         i ? sctx.lineTo(x, y) : sctx.moveTo(x, y);
+      }
+      sctx.stroke();
+    } else if (!audio.paused) {
+      // 没有 Web Audio 时画模拟波形，跟着播放时间滚动
+      const t = audio.currentTime * 6;
+      sctx.strokeStyle = "#5CC8D6";
+      sctx.lineWidth = 1.5;
+      sctx.beginPath();
+      for (let x = 0; x <= w; x += 2) {
+        const u = x / w;
+        const a = (Math.sin(u * 23 + t * 3.1) * 0.5 + Math.sin(u * 61 - t * 5.3) * 0.3 + Math.sin(u * 7 + t) * 0.2) * Math.sin(u * Math.PI);
+        const y = h / 2 + a * h * 0.38 * (0.6 + 0.4 * Math.sin(t * 1.7));
+        x ? sctx.lineTo(x, y) : sctx.moveTo(x, y);
       }
       sctx.stroke();
     }
