@@ -1,20 +1,20 @@
 /* ============================================================
    王炜锋 — 作品集样式
-   暗场放映：放映厅暗色 / 座椅 / 放映光 / 浮尘 / 钨丝琥珀 / 调色青（Teal & Orange） / 录制红
+   黑粉：放映厅黑 / 深莓 / 放映光 / 浮尘 / 霓虹粉 / 浅樱粉 / 录制红
    ============================================================ */
 :root {
-  --graphite: #0C0A08;
-  --steel: #15110D;
-  --steel-2: #2A221A;
-  --line: rgba(244,236,221,.09);
-  --bone: #F4ECDD;
-  --ash: #988E80;
-  --amber: #FFB43B;
-  --cyan: #5BB8B4;
+  --graphite: #0B080A;
+  --steel: #160E13;
+  --steel-2: #2E1D27;
+  --line: rgba(251,238,244,.09);
+  --bone: #FBEEF4;
+  --ash: #A08A96;
+  --amber: #FF4FA3;
+  --cyan: #FF9ECF;
 
   --f-latin: "Big Shoulders Display", "Noto Sans SC", system-ui, sans-serif;
   --f-title: "Noto Serif SC", "Songti SC", "STSong", serif;
-  --rec: #FF4433;
+  --rec: #FF2E4D;
   --f-cjk: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 
   --bar: 0px;
@@ -126,7 +126,7 @@ img { max-width: 100%; display: block; }
   left: 0; bottom: 0; width: 9px;
   background:
     linear-gradient(var(--steel-2), var(--steel-2)) center / 1px 100% no-repeat,
-    repeating-linear-gradient(to bottom, rgba(244,236,221,.14) 0 1px, transparent 1px 8px) center / 5px 100% no-repeat;
+    repeating-linear-gradient(to bottom, rgba(251,238,244,.14) 0 1px, transparent 1px 8px) center / 5px 100% no-repeat;
 }
 .rail__list::after {
   left: 3px; width: 3px; height: var(--fill);
@@ -153,7 +153,7 @@ img { max-width: 100%; display: block; }
 .rail__list a.is-active .rail__node {
   background: var(--amber); border-color: var(--amber);
   transform: rotate(45deg) scale(1.15);
-  box-shadow: 0 0 0 4px rgba(255,180,59,.16);
+  box-shadow: 0 0 0 4px rgba(255,79,163,.16);
 }
 .rail__gap { height: 18px; }
 .rail__cta {
@@ -177,12 +177,12 @@ main, .footer { margin-left: var(--rail); }
   text-decoration: none;
   color: var(--bone);
   background: var(--bg);
-  border: 1px solid rgba(244,236,221,.4);
+  border: 1px solid rgba(251,238,244,.4);
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
   transition: background .2s, color .2s, border-color .2s;
   cursor: pointer;
 }
-.btn:hover { border-color: var(--bone); background: rgba(244,236,221,.06); }
+.btn:hover { border-color: var(--bone); background: rgba(251,238,244,.06); }
 .btn--solid { --bg: var(--amber); color: var(--graphite); border-color: var(--amber); }
 .btn--solid:hover { background: var(--bone); border-color: var(--bone); }
 
@@ -222,7 +222,7 @@ main, .footer { margin-left: var(--rail); }
 }
 .hero__name::before { color: var(--amber); transform: translate(var(--sx, 0px), var(--sy, 0px)); opacity: .9; }
 .hero__name::after { color: var(--cyan); transform: translate(calc(var(--sx, 0px) * -1), calc(var(--sy, 0px) * -1)); opacity: .7; }
-.hero__lead { max-width: 32em; margin: 22px 0 30px; font-size: var(--t-lg); color: rgba(244,236,221,.85); }
+.hero__lead { max-width: 32em; margin: 22px 0 30px; font-size: var(--t-lg); color: rgba(251,238,244,.85); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 .hero__hint {
   position: absolute; right: var(--gutter); bottom: 22px; margin: 0;
@@ -237,7 +237,7 @@ main, .footer { margin-left: var(--rail); }
 
 /* 开屏右侧：作品目录 */
 .index-card {
-  background: rgba(12,10,8,.78); backdrop-filter: blur(8px);
+  background: rgba(11,8,10,.78); backdrop-filter: blur(8px);
   border: 1px solid var(--line); border-top: 2px solid var(--amber);
 }
 .index-card__head {
@@ -256,7 +256,7 @@ main, .footer { margin-left: var(--rail); }
 .index-card i { grid-row: 1 / 3; font-style: normal; font-family: var(--f-latin); font-weight: 600; font-size: var(--t-lg); color: var(--amber); }
 .index-card b { font-weight: 700; font-size: var(--t-md); line-height: 1.4; }
 .index-card small { grid-column: 2; color: var(--ash); font-size: var(--t-xs); line-height: 1.5; }
-.index-card a:hover { background: rgba(255,180,59,.08); }
+.index-card a:hover { background: rgba(255,79,163,.08); }
 .index-card a:hover::after { color: var(--amber); transform: translateX(3px); }
 
 /* ---------- 通用 section ---------- */
@@ -281,7 +281,7 @@ main, .footer { margin-left: var(--rail); }
   content: attr(data-ghost);
   position: absolute; left: -.04em; bottom: -.18em; z-index: -1;
   font-family: var(--f-latin); font-size: 2.6em; font-weight: 700; line-height: 1;
-  color: transparent; -webkit-text-stroke: 1px rgba(244,236,221,.08);
+  color: transparent; -webkit-text-stroke: 1px rgba(251,238,244,.08);
   white-space: nowrap; pointer-events: none;
 }
 
@@ -296,8 +296,8 @@ main, .footer { margin-left: var(--rail); }
 }
 .tracks__row:last-child { border-bottom: 0; }
 .track { cursor: pointer; position: relative; transition: background .15s; }
-.track:hover, .track:focus-within { background: rgba(244,236,221,.04); }
-.track.is-playing { background: rgba(255,180,59,.07); }
+.track:hover, .track:focus-within { background: rgba(251,238,244,.04); }
+.track.is-playing { background: rgba(255,79,163,.07); }
 .track.is-playing .track__num { color: var(--amber); }
 .track__num { font-family: var(--f-latin); color: var(--ash); font-variant-numeric: tabular-nums; }
 .track__title { display: flex; flex-direction: column; min-width: 0; }
@@ -305,7 +305,7 @@ main, .footer { margin-left: var(--rail); }
 .track__title span { color: var(--ash); font-size: var(--t-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .track__dur { font-family: var(--f-latin); color: var(--ash); font-size: var(--t-sm); font-variant-numeric: tabular-nums; }
 .track__go {
-  width: 40px; height: 40px; border: 1px solid rgba(244,236,221,.3); background: transparent;
+  width: 40px; height: 40px; border: 1px solid rgba(251,238,244,.3); background: transparent;
   display: grid; place-items: center; cursor: pointer;
   clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
 }
@@ -337,10 +337,10 @@ main, .footer { margin-left: var(--rail); }
 .about__id dd { margin: 0; font-size: var(--t-sm); text-align: right; }
 .about__tag {
   display: inline-block; margin: 0 0 16px; padding: 4px 12px;
-  font-size: var(--t-xs); color: var(--amber); border: 1px solid rgba(255,180,59,.5);
+  font-size: var(--t-xs); color: var(--amber); border: 1px solid rgba(255,79,163,.5);
 }
 .about__lead { font-size: clamp(1.5rem, 2.2vw, 1.953rem); line-height: 1.4; margin: 0 0 18px; font-weight: 700; }
-.about__text { margin: 0; color: rgba(244,236,221,.8); }
+.about__text { margin: 0; color: rgba(251,238,244,.8); }
 .about__sub { margin: 36px 0 14px; font-size: var(--t-sm); font-weight: 500; color: var(--ash); letter-spacing: .08em; }
 .about__sub--first { margin-top: 0; }
 .facts {
@@ -358,7 +358,7 @@ main, .footer { margin-left: var(--rail); }
 
 /* ---------- 联系 ---------- */
 .contact__wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 64px; align-items: end; }
-.contact__lead { font-size: var(--t-lg); color: rgba(244,236,221,.8); margin: 28px 0 0; }
+.contact__lead { font-size: var(--t-lg); color: rgba(251,238,244,.8); margin: 28px 0 0; }
 .copybox {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto;
   align-items: center; column-gap: 16px;
@@ -399,7 +399,7 @@ body.has-player .footer { padding-bottom: 110px; }
   grid-template-rows: auto auto;
   align-items: center; column-gap: 18px;
   padding: 12px 16px 8px;
-  background: rgba(26,21,16,.96); backdrop-filter: blur(8px);
+  background: rgba(26,15,21,.96); backdrop-filter: blur(8px);
   border-top: 2px solid var(--amber);
   box-shadow: 0 12px 40px rgba(0,0,0,.45);
 }
@@ -447,7 +447,7 @@ body.has-player .footer { padding-bottom: 110px; }
 .modal__empty {
   position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px;
 }
-.modal__empty p { margin: 0; background: rgba(12,10,8,.85); padding: 18px 24px; max-width: 30em; }
+.modal__empty p { margin: 0; background: rgba(11,8,10,.85); padding: 18px 24px; max-width: 30em; }
 .modal__empty code { font-family: var(--f-latin); color: var(--amber); }
 
 /* ---------- 响应式 ---------- */
@@ -469,7 +469,7 @@ body.has-player .footer { padding-bottom: 110px; }
     flex-direction: row; align-items: center; justify-content: space-between;
     padding: 0 var(--gutter); overflow: visible;
     border-right: 0; border-bottom: 1px solid var(--line);
-    background: rgba(12,10,8,.92); backdrop-filter: blur(10px);
+    background: rgba(11,8,10,.92); backdrop-filter: blur(10px);
   }
   .rail__brand { position: static; }
   .rail__toggle {

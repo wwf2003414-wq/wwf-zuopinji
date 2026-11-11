@@ -18,7 +18,7 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
   /* ---------- 放映光束 · LightRays ----------
-     <div data-rays data-origin="top-center" data-color="#ffd9a0"></div> */
+     <div data-rays data-origin="top-center" data-color="#ff9ccc"></div> */
   const VERT = `#version 300 es
 const vec2 c[3] = vec2[3](vec2(-1.0,-1.0), vec2(3.0,-1.0), vec2(-1.0,3.0));
 void main(){ gl_Position = vec4(c[gl_VertexID], 0.0, 1.0); }`;
@@ -79,7 +79,7 @@ void main(){
   function Rays(box) {
     const o = box.dataset;
     const cfg = {
-      origin: ORIGINS[o.origin] || ORIGINS["top-center"], color: hex(o.color || "#ffd9a0"),
+      origin: ORIGINS[o.origin] || ORIGINS["top-center"], color: hex(o.color || "#ff9ccc"),
       spread: +o.spread || 0.55, length: +o.length || 2.6, density: +o.density || 1, sharp: 0.35,
       glow: o.glow ? +o.glow : 0.6, haze: 0.35, intensity: +o.intensity || 1, influence: 0.12, opacity: o.opacity ? +o.opacity : 1
     };
@@ -183,7 +183,7 @@ void main(){
         const n = Math.round((w * h) / 400000 * 6 * Math.random());
         for (let i = 0; i < n; i++) {
           const x = Math.random() * w, y = Math.random() * h, r = 0.5 + Math.random() ** 2.5 * 2.2;
-          dc.fillStyle = Math.random() < 0.4 ? "rgba(255,246,228,.55)" : "rgba(10,8,6,.6)";
+          dc.fillStyle = Math.random() < 0.4 ? "rgba(255,236,246,.55)" : "rgba(10,6,9,.6)";
           dc.beginPath(); dc.arc(x, y, r, 0, 6.283); dc.fill();
         }
       }

@@ -42,14 +42,14 @@
   })();
 
   /* ---------- 自动封面：没有封面图时用 id 生成一张频谱图 ---------- */
-  function coverCanvas(id, { w = 800, h = 450, accent = "255,180,59", play = true } = {}) {
+  function coverCanvas(id, { w = 800, h = 450, accent = "255,79,163", play = true } = {}) {
     const c = document.createElement("canvas");
     c.width = w; c.height = h;
     const g = c.getContext("2d");
     let seed = 7;
     for (const ch of id) seed = (seed * 31 + ch.charCodeAt(0)) % 2147483647;
     const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    g.fillStyle = "#1E1914"; g.fillRect(0, 0, w, h);
+    g.fillStyle = "#24161E"; g.fillRect(0, 0, w, h);
     const n = 72, bw = w / n;
     for (let i = 0; i < n; i++) {
       const env = Math.sin((i / n) * Math.PI);
@@ -60,9 +60,9 @@
     }
     if (play) {
       const r = Math.min(w, h) * 0.1;
-      g.fillStyle = "rgba(12,10,8,.75)";
+      g.fillStyle = "rgba(11,8,10,.75)";
       g.beginPath(); g.arc(w / 2, h / 2, r, 0, Math.PI * 2); g.fill();
-      g.fillStyle = "#FFB43B";
+      g.fillStyle = "#FF4FA3";
       g.beginPath(); g.moveTo(w / 2 - r * 0.3, h / 2 - r * 0.42); g.lineTo(w / 2 + r * 0.48, h / 2); g.lineTo(w / 2 - r * 0.3, h / 2 + r * 0.42); g.fill();
     }
     c.setAttribute("aria-hidden", "true");
@@ -165,7 +165,7 @@
       clips.forEach((clip, k) => {
         const ai = clip.kind === "ai";
         const label = clip.label;
-        const accent = ai ? "91,184,180" : "244,236,221";
+        const accent = ai ? "255,158,207" : "251,238,244";
         const id = `${v.id}-${k}`;
         const row = document.createElement("button");
         row.type = "button";
@@ -254,7 +254,7 @@
       zoom.setAttribute("aria-label", `放大查看：${s.title} 操作面板`);
       if (p.src) { const img = new Image(); img.src = p.src; img.alt = `${s.title} 操作面板`; zoom.appendChild(img); }
       else {
-        zoom.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "91,184,180", play: false }));
+        zoom.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "255,158,207", play: false }));
         zoom.insertAdjacentHTML("beforeend", '<span class="pending">待上传截图</span>');
       }
       zoom.addEventListener("click", () => openMedia({ ...p, type: "image" }, `${s.title} · ${p.label || "操作面板"}`));
@@ -272,7 +272,7 @@
         const b = document.createElement("button");
         b.type = "button"; b.className = "flow__audio voice__row"; b.dataset.id = r.id;
         b.innerHTML = `<span class="voice__play">${ICON_PLAY}</span><span class="voice__label">${esc(r.label)}</span>`;
-        b.appendChild(waveBars(r.id, "91,184,180"));
+        b.appendChild(waveBars(r.id, "255,158,207"));
         b.addEventListener("click", () => window.Player.play({ id: r.id, title, subtitle: "拟真数字人流程", src: r.src, duration: "0:12" }));
         resFrame.appendChild(b);
         if (!r.src) resFrame.insertAdjacentHTML("beforeend", '<span class="pending">待上传 · 现在是示例音</span>');

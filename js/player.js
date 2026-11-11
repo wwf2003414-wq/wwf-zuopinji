@@ -47,11 +47,11 @@
     if (scope.width !== w * dpr) { scope.width = w * dpr; scope.height = h * dpr; }
     sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     sctx.clearRect(0, 0, w, h);
-    sctx.strokeStyle = "rgba(244,236,221,.12)";
+    sctx.strokeStyle = "rgba(251,238,244,.12)";
     sctx.beginPath(); sctx.moveTo(0, h / 2); sctx.lineTo(w, h / 2); sctx.stroke();
     if (analyser && !audio.paused) {
       analyser.getByteTimeDomainData(buf);
-      sctx.strokeStyle = "#5BB8B4";
+      sctx.strokeStyle = "#FF9ECF";
       sctx.lineWidth = 1.5;
       sctx.beginPath();
       for (let i = 0; i < buf.length; i++) {
@@ -63,7 +63,7 @@
     } else if (!audio.paused) {
       // 没有 Web Audio 时画模拟波形，跟着播放时间滚动
       const t = audio.currentTime * 6;
-      sctx.strokeStyle = "#5BB8B4";
+      sctx.strokeStyle = "#FF9ECF";
       sctx.lineWidth = 1.5;
       sctx.beginPath();
       for (let x = 0; x <= w; x += 2) {

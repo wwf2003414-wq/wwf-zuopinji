@@ -11,13 +11,13 @@
 :root {
   --gate: 16px;      /* 画面框圆角（片门） */
   --panel: 12px;     /* 面板圆角 */
-  --lamp-edge: rgba(255,200,130,.34);
-  --lamp-soft: rgba(255,200,130,.08);
+  --lamp-edge: rgba(255,140,200,.34);
+  --lamp-soft: rgba(255,140,200,.08);
 }
 
 body {
   background:
-    radial-gradient(120% 70% at 50% -10%, rgba(255,170,70,.07), transparent 60%),
+    radial-gradient(120% 70% at 50% -10%, rgba(255,60,150,.07), transparent 60%),
     var(--graphite);
   font-feature-settings: "palt" 0;
 }
@@ -37,9 +37,9 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .rays { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .rays__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .rays--fallback { /* 不支持 WebGL2 时，用渐变画一束静态光 */
-  background: conic-gradient(from 160deg at 50% -10%, transparent 0deg, rgba(255,210,150,.16) 16deg, rgba(255,210,150,.05) 28deg, transparent 40deg);
+  background: conic-gradient(from 160deg at 50% -10%, transparent 0deg, rgba(255,165,212,.16) 16deg, rgba(255,165,212,.05) 28deg, transparent 40deg);
 }
-.contact__rays.rays--fallback { background: conic-gradient(from -20deg at 50% 110%, transparent 0deg, rgba(255,200,130,.12) 18deg, transparent 40deg); }
+.contact__rays.rays--fallback { background: conic-gradient(from -20deg at 50% 110%, transparent 0deg, rgba(255,140,200,.12) 18deg, transparent 40deg); }
 
 /* ---------- 开屏：胶片片头倒数 ---------- */
 .loader { background: var(--graphite); flex-direction: column; gap: 26px; display: flex; align-items: center; justify-content: center; }
@@ -50,22 +50,22 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .leader__sweep {
   --a: 0deg;
   position: absolute; inset: 0; border-radius: 50%;
-  background: conic-gradient(rgba(255,200,130,.22) var(--a), rgba(255,200,130,.04) var(--a));
+  background: conic-gradient(rgba(255,140,200,.22) var(--a), rgba(255,140,200,.04) var(--a));
 }
 .leader__ring {
   position: absolute; inset: 0; border-radius: 50%;
-  box-shadow: inset 0 0 0 2px rgba(244,236,221,.7), inset 0 0 0 14px var(--graphite), inset 0 0 0 15px rgba(244,236,221,.35);
+  box-shadow: inset 0 0 0 2px rgba(251,238,244,.7), inset 0 0 0 14px var(--graphite), inset 0 0 0 15px rgba(251,238,244,.35);
 }
 .leader__cross {
   position: absolute; inset: -12%;
   background:
-    linear-gradient(rgba(244,236,221,.4), rgba(244,236,221,.4)) center / 1px 100% no-repeat,
-    linear-gradient(rgba(244,236,221,.4), rgba(244,236,221,.4)) center / 100% 1px no-repeat;
+    linear-gradient(rgba(251,238,244,.4), rgba(251,238,244,.4)) center / 1px 100% no-repeat,
+    linear-gradient(rgba(251,238,244,.4), rgba(251,238,244,.4)) center / 100% 1px no-repeat;
 }
 .leader__num {
   position: relative; font-family: var(--f-latin); font-weight: 900; line-height: 1;
   font-size: min(30vmin, 190px); color: var(--bone);
-  text-shadow: 0 0 40px rgba(255,200,130,.35);
+  text-shadow: 0 0 40px rgba(255,140,200,.35);
 }
 .loader__label { margin: 0; font-size: var(--t-sm); color: var(--ash); letter-spacing: .3em; }
 
@@ -74,8 +74,8 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
   clip-path: none; border-radius: 999px;
 }
 .btn { padding: 13px 30px; font-family: var(--f-cjk); font-weight: 700; letter-spacing: .04em; }
-.btn--solid { box-shadow: 0 0 0 0 rgba(255,180,59,0); transition: background .2s, color .2s, box-shadow .35s; }
-.btn--solid:hover { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 36px 4px rgba(255,180,59,.35); }
+.btn--solid { box-shadow: 0 0 0 0 rgba(255,79,163,0); transition: background .2s, color .2s, box-shadow .35s; }
+.btn--solid:hover { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 36px 4px rgba(255,79,163,.35); }
 .btn:not(.btn--solid):hover { border-color: var(--amber); color: var(--amber); background: transparent; }
 .track__go, .voice__play, .player__btn { clip-path: none; border-radius: 50%; }
 .resume__icon { clip-path: none; border-radius: 50%; }
@@ -85,11 +85,11 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
   border-radius: var(--panel); overflow: hidden;
 }
 .tracks, .spec, .facts, .flow, .copybox, .index-card, .modal__frame { border-top: 1px solid var(--lamp-edge); }
-.about__side { border-top: 1px solid rgba(91,184,180,.45); }
+.about__side { border-top: 1px solid rgba(255,158,207,.45); }
 .facts { gap: 1px; }
 .account { border-left: 0; box-shadow: inset 3px 0 0 var(--amber); }
 .film__media, .short__media, .flow__frame, .portrait-frame { border-radius: var(--gate); }
-.film__media { clip-path: none; box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(244,236,221,.06); }
+.film__media { clip-path: none; box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(251,238,244,.06); }
 .portrait { clip-path: none; }
 .portrait-frame { position: relative; overflow: hidden; }
 
@@ -97,17 +97,17 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .spot {
   --mx: 50%; --my: 50%;
   position: relative;
-  background-image: radial-gradient(280px circle at var(--mx) var(--my), rgba(255,196,120, calc(.13 * var(--spot))), transparent 70%);
+  background-image: radial-gradient(280px circle at var(--mx) var(--my), rgba(255,125,192, calc(.13 * var(--spot))), transparent 70%);
   transition: --spot .35s ease, box-shadow .35s ease;
 }
-.spot.is-lit { --spot: 1; box-shadow: inset 0 0 0 1px rgba(255,196,120,.22); }
-.account.spot.is-lit { box-shadow: inset 3px 0 0 var(--amber), inset 0 0 0 1px rgba(255,196,120,.22); }
+.spot.is-lit { --spot: 1; box-shadow: inset 0 0 0 1px rgba(255,125,192,.22); }
+.account.spot.is-lit { box-shadow: inset 3px 0 0 var(--amber), inset 0 0 0 1px rgba(255,125,192,.22); }
 
 /* ---------- 3D 倾斜卡片（fx.js · Tilt） ---------- */
 .tilt { will-change: transform; transform-style: preserve-3d; }
 .tilt__glare {
   position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
-  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,236,205,.32), transparent 55%);
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,226,240,.32), transparent 55%);
   mix-blend-mode: soft-light; opacity: 0; transition: opacity .35s;
 }
 .tilt.is-tilt .tilt__glare { opacity: 1; }
@@ -124,7 +124,7 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .section__title { font-weight: 900; font-size: clamp(2.4rem, 4.6vw, 3.6rem); letter-spacing: .02em; }
 .section__title::before {
   font-family: var(--f-latin); font-weight: 900; font-size: 2.9em; letter-spacing: .02em;
-  -webkit-text-stroke: 1px rgba(255,200,130,.09); bottom: -.22em;
+  -webkit-text-stroke: 1px rgba(255,140,200,.09); bottom: -.22em;
 }
 .section__kicker { font-family: var(--f-latin); font-size: var(--t-md); letter-spacing: .06em; gap: 8px; margin-bottom: 12px; }
 .section__kicker i { background: none; color: var(--amber); padding: 0; font-weight: 900; font-size: 1.5rem; line-height: 1; }
@@ -139,29 +139,29 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .hero__rays { z-index: -1; }
 .hero::after { /* 地面反光：放映光落到名字下面 */
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; z-index: -1; pointer-events: none;
-  background: linear-gradient(transparent, rgba(12,10,8,.85));
+  background: linear-gradient(transparent, rgba(11,8,10,.85));
 }
 .hero__name {
   font-family: var(--f-title); font-weight: 900;
   font-size: clamp(5rem, 13vw, 13.5rem); letter-spacing: .04em; line-height: .95;
   color: var(--bone);
-  text-shadow: 0 0 60px rgba(255,200,130,.28), 0 2px 0 rgba(0,0,0,.4);
+  text-shadow: 0 0 60px rgba(255,140,200,.28), 0 2px 0 rgba(0,0,0,.4);
 }
 .hero__name::before, .hero__name::after { content: none; }
 .hero__latin { font-family: var(--f-latin); font-weight: 700; letter-spacing: .62em; font-size: clamp(1rem, 1.6vw, 1.4rem); }
 .hero__role { font-weight: 500; letter-spacing: .18em; }
-.hero__lead { color: rgba(244,236,221,.82); }
-.index-card { background: rgba(12,10,8,.62); backdrop-filter: blur(10px); }
+.hero__lead { color: rgba(251,238,244,.82); }
+.index-card { background: rgba(11,8,10,.62); backdrop-filter: blur(10px); }
 .index-card i { font-family: var(--f-latin); font-weight: 900; font-size: 1.6rem; }
 .index-card__freq { font-family: var(--f-latin); font-size: var(--t-sm); letter-spacing: .08em; }
 .hero__hint { letter-spacing: .1em; }
 
 /* ---------- 跑马灯（fx.js · Marquee），做成一条胶片 ---------- */
 .marquee {
-  --hole: rgba(12,10,8,1);
+  --hole: rgba(11,8,10,1);
   position: relative; overflow: hidden; padding: 30px 0;
-  background: #17120D;
-  border-block: 1px solid rgba(255,200,130,.12);
+  background: #170C12;
+  border-block: 1px solid rgba(255,140,200,.12);
 }
 .marquee::before, .marquee::after { /* 胶片齿孔 */
   content: ""; position: absolute; left: 0; right: 0; height: 10px; pointer-events: none;
@@ -176,7 +176,7 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
   font-family: var(--f-latin), var(--f-cjk); font-weight: 900; text-transform: none;
   font-size: clamp(1.8rem, 3.6vw, 3rem); line-height: 1.2; color: var(--bone);
 }
-.marquee__track i { display: inline-block; width: .32em; height: .32em; margin: 0 .7em; border-radius: 50%; background: var(--amber); box-shadow: 0 0 14px rgba(255,180,59,.6); }
+.marquee__track i { display: inline-block; width: .32em; height: .32em; margin: 0 .7em; border-radius: 50%; background: var(--amber); box-shadow: 0 0 14px rgba(255,79,163,.6); }
 .marquee__row--alt { margin-top: 6px; }
 .marquee__row--alt .marquee__track { font-family: var(--f-title); font-weight: 700; font-size: clamp(1rem, 1.6vw, 1.3rem); color: var(--ash); }
 .marquee__row--alt .marquee__track i { width: .3em; height: .3em; background: transparent; box-shadow: inset 0 0 0 1px var(--ash); }
@@ -188,12 +188,12 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .account__nums b { font-size: clamp(2.6rem, 4vw, 3.6rem); }
 
 /* ---------- 正在播放：录制红 ---------- */
-.track.is-playing { background-color: rgba(255,68,51,.07); }
+.track.is-playing { background-color: rgba(255,46,77,.07); }
 .track.is-playing .track__num { color: var(--rec); }
 .track.is-playing .eq i { background: var(--rec); }
 .voice__row.is-playing { border-color: var(--rec); }
 .voice__row.is-playing .voice__play { background: var(--rec); color: var(--bone); }
-.player { border-top: 0; border-radius: 999px; padding: 10px 22px 6px 10px; background: rgba(26,21,16,.92); box-shadow: 0 0 0 1px rgba(255,200,130,.16), 0 20px 60px rgba(0,0,0,.6); }
+.player { border-top: 0; border-radius: 999px; padding: 10px 22px 6px 10px; background: rgba(26,15,21,.92); box-shadow: 0 0 0 1px rgba(255,140,200,.16), 0 20px 60px rgba(0,0,0,.6); }
 .player.is-playing .player__info strong::before {
   content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%;
   background: var(--rec); box-shadow: 0 0 10px var(--rec); vertical-align: middle;
@@ -202,7 +202,7 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 @keyframes onair { 50% { opacity: .35; } }
 
 /* ---------- 流程面板 / 作品 ---------- */
-.flow__tab[aria-selected="true"] { background: rgba(255,180,59,.1); }
+.flow__tab[aria-selected="true"] { background: rgba(255,79,163,.1); }
 .flow__tab[aria-selected="true"]::after { background: var(--steel); }
 .film { gap: clamp(28px, 4vw, 64px); }
 .films { gap: clamp(56px, 8vw, 110px); }
@@ -210,7 +210,7 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 /* ---------- 片尾：联系 ---------- */
 .contact { isolation: isolate; overflow: hidden; padding-bottom: clamp(110px, 16vh, 180px); }
 .contact__lead { font-weight: 700; }
-.copybox { background-color: rgba(21,17,13,.82); backdrop-filter: blur(8px); }
+.copybox { background-color: rgba(22,13,18,.82); backdrop-filter: blur(8px); }
 .copybox__value { font-family: var(--f-latin); font-weight: 900; font-size: clamp(1.5rem, 2.3vw, 2.3rem); letter-spacing: .02em; white-space: nowrap; word-break: normal; overflow-wrap: normal; }
 @media (max-width: 480px) { .copybox__value { font-size: 1.45rem; } }
 .copybox__btn.is-copied { color: var(--cyan); border-color: var(--cyan); }
