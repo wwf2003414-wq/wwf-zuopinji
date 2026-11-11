@@ -42,10 +42,24 @@ AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安
 index.html          页面结构和个人信息
 css/style.css       基础样式（配色、导航、开屏、播放器）
 css/components.css  各版块样式（广告片、数字人、音乐、短片）
+css/cinema.css      「暗场放映」统一视觉层（配色、字体、圆角、特效样式），最后加载
 js/data.js          作品数据（最常改的文件）
-js/hero.js          开屏互动波形
 js/player.js        底部音频播放器
 js/demo-audio.js    占位音频生成
-js/main.js          各版块渲染、导航、视频弹窗
+js/main.js          各版块渲染、导航、视频弹窗、片头倒数
+js/fx.js            视觉特效：放映光束、胶片颗粒、乱码解码、跑马灯、聚光灯卡片、3D 倾斜、数字滚动
 assets/             图标、照片、媒体文件
 ```
+
+## 视觉特效
+
+`js/fx.js` 里的特效移植自 [React Bits](https://reactbits.dev)（MIT + Commons Clause，© David Haz），改写成不依赖 React 的原生 JS，所以网页仍然可以直接双击打开。用法是在 HTML 元素上加属性：
+
+| 属性 / class | 效果 |
+| --- | --- |
+| `data-rays` | 放映光束背景（LightRays），可加 `data-origin="bottom-center"`、`data-color` |
+| `data-decrypt` / `data-decrypt="view"` | 乱码解码浮现（开屏后 / 滚动到时） |
+| `data-marquee` | 跑马灯，滚动越快走得越快（ScrollVelocity） |
+| `class="spot"` | 鼠标经过时的聚光灯（SpotlightCard） |
+| `class="tilt"` | 3D 倾斜 + 反光（TiltedCard） |
+| `data-count` | 数字从 0 滚到原值（CountUp） |

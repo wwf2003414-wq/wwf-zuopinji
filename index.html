@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>王炜锋 — AI 视频作品集</title>
   <meta name="description" content="王炜锋的作品集：AI 创意广告片、拟真数字人、AI 音乐与视觉短片。" />
-  <meta name="theme-color" content="#15171A" />
+  <meta name="theme-color" content="#0C0A08" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/cinema.css" />
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
@@ -50,15 +51,11 @@
   <main>
     <!-- 首页 / 互动开屏 -->
     <section class="hero" id="index" data-section>
-      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-      <div class="hero__hud" aria-hidden="true">
-        <span class="hud hud--tl">CH-01 · 48kHz</span>
-        <span class="hud hud--tr" id="hudCoord">X 000 / Y 000</span>
-      </div>
+      <div class="rays hero__rays" data-rays data-wait-loader data-origin="top-center" data-color="#ffd29a" data-spread="0.6" data-length="2.4"></div>
       <div class="wrap hero__wrap">
         <div class="hero__content">
           <p class="hero__role">AI 视频制作 · AIGC 视听内容创作</p>
-          <h1 class="hero__name" data-text="王炜锋">王炜锋</h1>
+          <h1 class="hero__name" data-decrypt>王炜锋</h1>
           <p class="hero__latin" aria-hidden="true">WANG WEIFENG</p>
           <p class="hero__lead">做过 AI 品牌广告片，也搭过能每天稳定出片的拟真数字人流程。创意、分镜、AI 生成、声音设计都能独立完成。</p>
           <div class="hero__actions">
@@ -67,8 +64,8 @@
           </div>
         </div>
 
-        <nav class="index-card" aria-label="作品目录">
-          <p class="index-card__head"><span>作品目录</span><span class="index-card__freq" id="hudFreq">F 440.0 Hz</span></p>
+        <nav class="index-card spot" aria-label="作品目录">
+          <p class="index-card__head"><span>今晚放映</span><span class="index-card__freq">4 部分</span></p>
           <ol>
             <li><a href="#ads"><i>01</i><b>AI 创意广告片</b><small>EBC 品牌宣传片 · 画面全部 AI 生成</small></a></li>
             <li><a href="#human"><i>02</i><b>拟真数字人</b><small>2 个抖音财经账号日更 · 粉丝 +50%</small></a></li>
@@ -77,21 +74,27 @@
           </ol>
         </nav>
       </div>
-      <p class="hero__hint" aria-hidden="true">移动鼠标拨动波形 · 点击发出脉冲</p>
+      <p class="hero__hint" aria-hidden="true">移动鼠标，挡一下放映光</p>
     </section>
+
+    <!-- 工具跑马灯：滚动越快走得越快 -->
+    <div class="marquee" aria-label="常用工具">
+      <div class="marquee__row" data-marquee data-speed="38"><span class="marquee__track">即梦<i></i>Seedance<i></i>Midjourney<i></i>Nano Banana 2<i></i>IndexTTS 2.5<i></i>LoRA 微调<i></i>Whisper<i></i>After Effects<i></i>Premiere Pro<i></i>剪映<i></i></span></div>
+      <div class="marquee__row marquee__row--alt" data-marquee data-speed="30" data-dir="right"><span class="marquee__track">创意策划<i></i>脚本分镜<i></i>AI 生成<i></i>声音设计<i></i>配乐混音<i></i>数字人<i></i>自动化剪辑<i></i>调色包装<i></i></span></div>
+    </div>
 
     <!-- 关于 -->
     <section class="section about" id="about" data-section>
       <div class="wrap">
         <header class="section__head">
           <div>
-            <p class="section__kicker">ABOUT</p>
+            <p class="section__kicker"><i>开场</i></p>
             <h2 class="section__title" data-ghost="ABOUT">关于我</h2>
           </div>
         </header>
         <div class="about__grid">
           <div class="about__portrait">
-            <img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" />
+            <div class="portrait-frame tilt" data-tilt="8"><img class="portrait" src="assets/images/avatar.png" alt="王炜锋的照片" width="720" height="720" /></div>
             <dl class="about__id">
               <div><dt>姓名</dt><dd>王炜锋</dd></div>
               <div><dt>求职方向</dt><dd>AI 视频生成 / AIGC</dd></div>
@@ -117,10 +120,10 @@
             <p class="about__text">负责过 EBC Financial Group 的 AIGC 品牌宣传片，包括创意、脚本、分镜和全片声音设计。独立搭建拟真数字人流程，支撑 2 个抖音财经账号的日常更新，其中「交易员cool」在参与期间粉丝从 6 万涨到 9 万。音乐教育和计算机双专业：配乐、音效自己做，训练流程和剪辑工具也自己搭。</p>
 
             <ul class="facts">
-              <li><b>2 个</b><span>财经账号日更落地</span></li>
-              <li><b>+50%</b><span>交易员cool 参与期间粉丝增长</span></li>
-              <li><b>3.8 分钟</b><span>训练一位新说话人的声音</span></li>
-              <li><b>全流程</b><span>创意 · 分镜 · AI 生成 · 声音</span></li>
+              <li class="spot"><b data-count>2 个</b><span>财经账号日更落地</span></li>
+              <li class="spot"><b data-count>+50%</b><span>交易员cool 参与期间粉丝增长</span></li>
+              <li class="spot"><b data-count>3.8 分钟</b><span>训练一位新说话人的声音</span></li>
+              <li class="spot"><b>全流程</b><span>创意 · 分镜 · AI 生成 · 声音</span></li>
             </ul>
 
             <h3 class="about__sub">经历</h3>
@@ -131,7 +134,7 @@
             </ol>
           </div>
 
-          <div class="about__side">
+          <div class="about__side spot">
             <h3 class="about__sub about__sub--first">专业技能</h3>
             <dl class="skills">
               <div><dt>AI 视频</dt><dd>即梦、LibTV、TapNow、Seedance；文生视频、图生视频、数字人驱动</dd></div>
@@ -150,7 +153,7 @@
       <div class="wrap">
         <header class="section__head">
           <div>
-            <p class="section__kicker"><i>01</i> FILMS</p>
+            <p class="section__kicker"><i>01</i><span>/ 04</span></p>
             <h2 class="section__title" data-ghost="FILMS">AI 创意广告片</h2>
           </div>
           <p class="section__note">画面全部由 AI 生成，创意、脚本、分镜和声音由我完成。</p>
@@ -164,18 +167,18 @@
       <div class="wrap">
         <header class="section__head">
           <div>
-            <p class="section__kicker"><i>02</i> AVATAR</p>
+            <p class="section__kicker"><i>02</i><span>/ 04</span></p>
             <h2 class="section__title" data-ghost="AVATAR">拟真数字人</h2>
           </div>
           <p class="section__note">独立负责。为财经短视频账号打造的数字人，解决通用数字人音色同质、语气生硬、口型不自然的问题。</p>
         </header>
 
         <dl class="spec">
-          <div><dt>训练集</dt><dd>60 分钟</dd></div>
-          <div><dt>单人训练耗时</dt><dd>3.8 分钟</dd></div>
-          <div><dt>配音中文字错率</dt><dd>3.4%</dd></div>
-          <div><dt>英文抽测字错率</dt><dd>0%</dd></div>
-          <div><dt>落地账号</dt><dd>2 个</dd></div>
+          <div class="spot"><dt>训练集</dt><dd data-count>60 分钟</dd></div>
+          <div class="spot"><dt>单人训练耗时</dt><dd data-count>3.8 分钟</dd></div>
+          <div class="spot"><dt>配音中文字错率</dt><dd data-count>3.4%</dd></div>
+          <div class="spot"><dt>英文抽测字错率</dt><dd data-count>0%</dd></div>
+          <div class="spot"><dt>落地账号</dt><dd data-count>2 个</dd></div>
         </dl>
 
         <div class="human__grid">
@@ -202,7 +205,7 @@
       <div class="wrap">
         <header class="section__head">
           <div>
-            <p class="section__kicker"><i>03</i> MUSIC</p>
+            <p class="section__kicker"><i>03</i><span>/ 04</span></p>
             <h2 class="section__title" data-ghost="MUSIC">AI 音乐</h2>
           </div>
           <p class="section__note">自己用 AI 创作的音乐，也是我做片子时的配乐来源。</p>
@@ -217,7 +220,7 @@
     <section class="section shorts-sec" id="shorts" data-section>
       <div class="wrap shorts-sec__wrap">
         <header class="shorts-sec__head">
-          <p class="section__kicker"><i>04</i> SHORTS</p>
+          <p class="section__kicker"><i>04</i><span>/ 04</span></p>
           <h2 class="section__title" data-ghost="SHORTS">视觉短片</h2>
           <p class="section__note">项目之外的个人创作。</p>
         </header>
@@ -227,15 +230,16 @@
 
     <!-- 联系 -->
     <section class="section contact" id="contact" data-section>
+      <div class="rays contact__rays" data-rays data-origin="bottom-center" data-color="#ffc77d" data-spread="0.45" data-length="1.6" data-intensity="0.8" data-glow="0.4"></div>
       <div class="wrap contact__wrap">
         <div>
-          <p class="section__kicker">CONTACT</p>
+          <p class="section__kicker"><i>片尾</i></p>
           <h2 class="section__title" data-ghost="CONTACT">联系</h2>
           <p class="contact__lead">正在找 AI 视频生成、AIGC 视听内容创作方向的工作，欢迎发邮件聊。</p>
         </div>
-        <div class="copybox">
+        <div class="copybox spot">
           <span class="copybox__label">邮箱</span>
-          <span class="copybox__value" id="mailText">w2240994753@163.com</span>
+          <span class="copybox__value" id="mailText" data-decrypt="view">w2240994753@163.com</span>
           <button class="copybox__btn" id="copyMail" type="button" data-copy="w2240994753@163.com" aria-live="polite">
             <svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h11v11H9z M5 15H4V4h11v1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             <svg class="i-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
@@ -277,8 +281,8 @@
 
   <script src="js/data.js"></script>
   <script src="js/demo-audio.js"></script>
-  <script src="js/hero.js"></script>
-  <script src="js/player.js"></script>
+    <script src="js/player.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/fx.js"></script>
 </body>
 </html>

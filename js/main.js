@@ -11,38 +11,45 @@
 
   $("#year").textContent = new Date().getFullYear();
 
-  /* ---------- 开屏加载 ---------- */
+  /* ---------- 开屏：胶片片头倒数 3-2-1 ---------- */
   (function loader() {
-    const box = $("#loader"), bar = $("#loaderBar"), num = $("#loaderNum");
+    const box = $("#loader"), sweep = $("#loaderBar"), num = $("#loaderNum");
     document.body.classList.add("is-loading");
-    const total = reduce ? 200 : 1300;
+    let closed = false;
+    const close = () => {
+      if (closed) return; closed = true;
+      box.classList.add("is-done"); document.body.classList.remove("is-loading");
+      document.dispatchEvent(new Event("loader:done"));
+    };
+    if (reduce) { num.textContent = "1"; setTimeout(close, 150); return; }
+    const per = 520, total = per * 3;
     const start = performance.now();
     let fontsReady = false;
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { fontsReady = true; });
     setTimeout(() => { fontsReady = true; }, 3000);
     function step(now) {
-      let k = Math.min(1, (now - start) / total);
-      if (!fontsReady) k = Math.min(k, 0.92);
-      const eased = 1 - Math.pow(1 - k, 3);
-      bar.style.width = eased * 100 + "%";
-      num.textContent = String(Math.round(eased * 100)).padStart(3, "0");
-      if (k < 1) requestAnimationFrame(step);
-      else setTimeout(() => { box.classList.add("is-done"); document.body.classList.remove("is-loading"); }, 180);
+      let t = now - start;
+      if (!fontsReady) t = Math.min(t, total - 1); // 字体没到就停在「1」
+      const k = Math.min(1, t / total);
+      const n = Math.max(1, 3 - Math.floor(t / per));
+      num.textContent = String(n);
+      sweep.style.setProperty("--a", ((t % per) / per * 360).toFixed(1) + "deg");
+      if (k < 1) requestAnimationFrame(step); else setTimeout(close, 120);
     }
     requestAnimationFrame(step);
     // 后台标签页里动画帧会暂停，用定时器兜底，保证加载层一定会关掉
-    setTimeout(() => { box.classList.add("is-done"); document.body.classList.remove("is-loading"); }, 4000);
+    setTimeout(close, 4200);
   })();
 
   /* ---------- 自动封面：没有封面图时用 id 生成一张频谱图 ---------- */
-  function coverCanvas(id, { w = 800, h = 450, accent = "245,183,0", play = true } = {}) {
+  function coverCanvas(id, { w = 800, h = 450, accent = "255,180,59", play = true } = {}) {
     const c = document.createElement("canvas");
     c.width = w; c.height = h;
     const g = c.getContext("2d");
     let seed = 7;
     for (const ch of id) seed = (seed * 31 + ch.charCodeAt(0)) % 2147483647;
     const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    g.fillStyle = "#2C3137"; g.fillRect(0, 0, w, h);
+    g.fillStyle = "#1E1914"; g.fillRect(0, 0, w, h);
     const n = 72, bw = w / n;
     for (let i = 0; i < n; i++) {
       const env = Math.sin((i / n) * Math.PI);
@@ -53,9 +60,9 @@
     }
     if (play) {
       const r = Math.min(w, h) * 0.1;
-      g.fillStyle = "rgba(21,23,26,.8)";
+      g.fillStyle = "rgba(12,10,8,.75)";
       g.beginPath(); g.arc(w / 2, h / 2, r, 0, Math.PI * 2); g.fill();
-      g.fillStyle = "#F5B700";
+      g.fillStyle = "#FFB43B";
       g.beginPath(); g.moveTo(w / 2 - r * 0.3, h / 2 - r * 0.42); g.lineTo(w / 2 + r * 0.48, h / 2); g.lineTo(w / 2 - r * 0.3, h / 2 + r * 0.42); g.fill();
     }
     c.setAttribute("aria-hidden", "true");
@@ -113,7 +120,7 @@
       const el = document.createElement("article");
       el.className = "film" + (i % 2 ? " film--flip" : "");
       el.innerHTML = `
-        <button class="film__media" type="button" aria-label="播放：${esc(ad.title)}">
+        <button class="film__media tilt" data-tilt="6" type="button" aria-label="播放：${esc(ad.title)}">
           ${hasMedia(ad) ? "" : '<span class="pending">待上传</span>'}
         </button>
         <div class="film__body">
@@ -142,7 +149,7 @@
     const box = $("#voices");
     (site.voices || []).forEach((v) => {
       const el = document.createElement("article");
-      el.className = "voice";
+      el.className = "voice spot";
       el.innerHTML = `
         <header class="voice__head">
           <strong>${esc(v.speaker)}</strong>
@@ -158,7 +165,7 @@
       clips.forEach((clip, k) => {
         const ai = clip.kind === "ai";
         const label = clip.label;
-        const accent = ai ? "92,200,214" : "230,226,216";
+        const accent = ai ? "91,184,180" : "244,236,221";
         const id = `${v.id}-${k}`;
         const row = document.createElement("button");
         row.type = "button";
@@ -247,7 +254,7 @@
       zoom.setAttribute("aria-label", `放大查看：${s.title} 操作面板`);
       if (p.src) { const img = new Image(); img.src = p.src; img.alt = `${s.title} 操作面板`; zoom.appendChild(img); }
       else {
-        zoom.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "92,200,214", play: false }));
+        zoom.appendChild(coverCanvas(p.id || `shot-${cur}`, { w: 960, h: 600, accent: "91,184,180", play: false }));
         zoom.insertAdjacentHTML("beforeend", '<span class="pending">待上传截图</span>');
       }
       zoom.addEventListener("click", () => openMedia({ ...p, type: "image" }, `${s.title} · ${p.label || "操作面板"}`));
@@ -265,7 +272,7 @@
         const b = document.createElement("button");
         b.type = "button"; b.className = "flow__audio voice__row"; b.dataset.id = r.id;
         b.innerHTML = `<span class="voice__play">${ICON_PLAY}</span><span class="voice__label">${esc(r.label)}</span>`;
-        b.appendChild(waveBars(r.id, "92,200,214"));
+        b.appendChild(waveBars(r.id, "91,184,180"));
         b.addEventListener("click", () => window.Player.play({ id: r.id, title, subtitle: "拟真数字人流程", src: r.src, duration: "0:12" }));
         resFrame.appendChild(b);
         if (!r.src) resFrame.insertAdjacentHTML("beforeend", '<span class="pending">待上传 · 现在是示例音</span>');
@@ -362,9 +369,9 @@
   /* ---------- 账号成果 ---------- */
   function renderAccounts() {
     $("#accounts").innerHTML = (site.accounts || []).map((a) => `
-      <div class="account">
+      <div class="account spot">
         <span class="account__name">${esc(a.name)}</span>
-        <span class="account__nums">${a.from ? `<s>${esc(a.from)}</s><i aria-hidden="true">→</i>` : ""}<b>${esc(a.to)}</b></span>
+        <span class="account__nums">${a.from ? `<s>${esc(a.from)}</s><i aria-hidden="true">→</i>` : ""}<b data-count>${esc(a.to)}</b></span>
         <span class="account__note">${esc(a.note)}</span>
       </div>`).join("");
   }
@@ -374,7 +381,7 @@
   function renderTracks() {
     (site.music || []).forEach((w, i) => {
       const row = document.createElement("div");
-      row.className = "tracks__row track";
+      row.className = "tracks__row track spot";
       row.setAttribute("role", "row");
       row.dataset.id = w.id;
       row.innerHTML = `
@@ -394,7 +401,7 @@
       const b = document.createElement("button");
       b.type = "button";
       b.className = "short";
-      b.innerHTML = `<span class="short__media"></span><span class="short__title">${esc(s.title)}</span><span class="short__note">${esc(s.note)}</span>`;
+      b.innerHTML = `<span class="short__media tilt" data-tilt="7"></span><span class="short__title">${esc(s.title)}</span><span class="short__note">${esc(s.note)}</span>`;
       fillCover($(".short__media", b), s, { w: 640, h: 360 });
       if (!hasMedia(s)) $(".short__media", b).insertAdjacentHTML("beforeend", '<span class="pending">待上传</span>');
       b.addEventListener("click", () => openMedia({ ...s, type: "video" }, s.title));
