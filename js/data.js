@@ -62,11 +62,10 @@ window.SITE = {
       id: "spk-b",
       speaker: "说话人 B",
       account: "Jimmy的美金日记",
-      text: "先听 Jimmy 历史口播里的一段原声，再听 AI 用克隆声音念一段全新的文案。",
+      text: "先听 Jimmy 历史口播里的一段原声，再听 AI 用克隆声音念一段全新的文案：「最近大家都在问我，美元现在还能不能拿，那今天我们就简单聊一下……」",
       clips: [
         { kind: "real", label: "本人原声", src: "assets/media/jimmy-real-1.mp3", duration: "0:30" },
-        // AI 版还没有上传：把文件放进 assets/media/ 后填上 src，例如 "assets/media/jimmy-ai.mp3"
-        { kind: "ai", label: "AI 生成", src: "", duration: "" }
+        { kind: "ai", label: "AI 生成", src: "assets/media/jimmy-ai.mp3", duration: "0:23" }
       ]
     }
   ],
