@@ -22,15 +22,15 @@ window.SITE = {
       title: "EBC 品牌宣传片",
       client: "EBC Financial Group",
       roles: ["创意策划", "编剧", "分镜", "声音设计"],
-      duration: "",
+      duration: "0:52",
       points: [
         "主导创意策划与脚本编写，完成分镜设计，确定全片叙事结构与镜头节奏。",
         "全片画面均由 AI 生成。",
         "独立完成配乐与音效设计：按音乐节奏规划画面节点，用声音强化情绪与品牌记忆点。"
       ],
       embed: "",
-      src: "",
-      cover: ""
+      src: "assets/media/ebc.mp4",
+      cover: "assets/media/ebc.jpg"
     },
     {
       id: "ad-2",
@@ -175,9 +175,8 @@ window.SITE = {
 
   /* ---------- AI 音乐 ---------- */
   music: [
-    { id: "m1", title: "AI 音乐作品一", subtitle: "占位：风格 / 用途", duration: "0:20", src: "", demo: { root: 45, scale: [0, 3, 7, 10, 12, 15], bpm: 84, wave: "triangle" } },
-    { id: "m2", title: "AI 音乐作品二", subtitle: "占位：风格 / 用途", duration: "0:18", src: "", demo: { root: 52, scale: [0, 3, 5, 7, 10, 12], bpm: 120, wave: "sawtooth" } },
-    { id: "m3", title: "AI 音乐作品三", subtitle: "占位：风格 / 用途", duration: "0:22", src: "", demo: { root: 48, scale: [0, 4, 7, 11, 12, 16], bpm: 96, wave: "square" } }
+    { id: "m-yaogun", title: "摇滚", subtitle: "AI 原创音乐 · 摇滚", duration: "1:00", src: "assets/media/music-yaogun.mp3" },
+    { id: "m-rnb", title: "R&B", subtitle: "AI 原创音乐 · R&B", duration: "1:01", src: "assets/media/music-rnb.mp3" }
   ],
 
   /* ---------- 个人创意视觉短片（非项目） ---------- */
