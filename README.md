@@ -40,6 +40,7 @@ AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安
 
 ```
 index.html          页面结构和个人信息
+css/fonts.css       字体声明（自托管，不依赖 Google Fonts），最先加载
 css/style.css       基础样式（配色、导航、开屏、播放器）
 css/components.css  各版块样式（广告片、数字人、音乐、短片）
 css/cinema.css      「暗场放映」统一视觉层（配色、字体、圆角、特效样式），最后加载
@@ -49,7 +50,12 @@ js/demo-audio.js    占位音频生成
 js/main.js          各版块渲染、导航、视频弹窗、片头倒数
 js/fx.js            视觉特效：放映光束、胶片颗粒、乱码解码、跑马灯、聚光灯卡片、3D 倾斜、数字滚动
 assets/             图标、照片、媒体文件
+assets/fonts/       字体文件（Noto Sans SC、Noto Serif SC、Big Shoulders Display）
 ```
+
+## 字体
+
+字体文件放在仓库里，国内网络打不开 Google 也能正常显示。中文字体按字符切成约 100 片，浏览器只下载页面上用到的那几片（首次打开约 2 MB，之后走缓存）；所有常用汉字都已包含，以后改文案、加新字不需要重新处理字体。三款字体都是 SIL Open Font License 1.1，可以免费商用和自托管。
 
 ## 视觉特效
 
