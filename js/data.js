@@ -19,15 +19,16 @@ window.SITE = {
   ads: [
     {
       id: "creative-ad",
-      title: "《差不多就得了吧？》",
+      title: "EBC 品宣创意片",
+      client: "EBC Financial Group",
       duration: "1:08",
       points: [
-        "从一句「差不多就得了吧」切入，以一位交易员的职业回忆讲述认真做事的价值。",
-        "用日记和旧照片打开回忆，再以账本、老式电脑和报纸头版串起不同年代的市场波动。",
-        "镜头从忙碌的交易大厅回到安静的书房，让年长的交易员回望自己的经历，呼应开场。"
+        "为 EBC 交易产品定下专业、审慎、重视交易纪律的传播基调。",
+        "从一位交易员数十年的职业经历切入，借不同年代的市场波动，呈现压力之下的判断与取舍。",
+        "以写实的年代质感与克制的镜头节奏，为后续产品宣传确立视觉风格和叙事口吻。"
       ],
       src: "assets/media/creative-ad.mp4",
-      cover: "assets/media/creative-ad.jpg"
+      cover: "assets/media/creative-ad.jpg?v=opening"
     },
     {
       id: "ebc",
