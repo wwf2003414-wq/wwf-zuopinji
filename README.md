@@ -15,7 +15,7 @@ js/
   fx.js             页面动效
 assets/
   documents/        简历 PDF
-  images/           个人照片和流程截图
+  images/           个人照片、制作实况和流程截图
   media/            作品视频、音频和封面
   fonts/            自托管字体
   favicon.svg       网站图标
@@ -27,7 +27,7 @@ assets/
 | --- | --- |
 | 简介、技能、经历和联系方式 | `index.html` |
 | 下载简历 | 替换 `assets/documents/aigc-director-wang-weifeng.pdf`。文件路径或下载文件名有变化时，同步修改 `index.html` 中的简历链接。 |
-| 创意广告片 | 在 `js/data.js` 的 `ads` 中改标题、简介、封面与视频。用 `src` 引用仓库内视频，或用 `embed` 填写站外播放器地址。 |
+| 创意广告片 | 在 `js/data.js` 的 `ads` 中改标题、简介、封面与视频。用 `src` 引用仓库内视频，或用 `embed` 填写站外播放器地址。制作实况照片填在 `processImages` 中。 |
 | 拟真数字人 | 在 `js/data.js` 的 `voices`、`pipeline` 和 `accounts` 中维护声音对比、制作流程和账号成果。 |
 | AI 音乐 | 在 `js/data.js` 的 `music` 中改曲名、音频地址和时长。 |
 

@@ -24,7 +24,11 @@ window.SITE = {
         "以写实的年代质感与克制的镜头节奏，为后续产品宣传确立视觉风格和叙事口吻。"
       ],
       src: "assets/media/creative-ad.mp4",
-      cover: "assets/media/creative-ad.jpg?v=opening"
+      cover: "assets/media/creative-ad.jpg?v=opening",
+      processImages: [
+        { src: "assets/images/ebc-creative/workstation.jpg", label: "后期工作台" },
+        { src: "assets/images/ebc-creative/editing-timeline.jpg", label: "剪辑与声音设计" }
+      ]
     },
     {
       id: "ebc",

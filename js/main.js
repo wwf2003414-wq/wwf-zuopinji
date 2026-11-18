@@ -117,6 +117,18 @@
   function renderFilms() {
     const box = $("#films");
     (site.ads || []).forEach((ad, i) => {
+      const processImages = ad.processImages || [];
+      const processGallery = processImages.length ? `
+        <div class="film__process">
+          <p class="film__process-label">制作实况</p>
+          <div class="film__process-photos">
+            ${processImages.map((photo) => `
+              <button class="film__process-photo" type="button" aria-label="放大查看：${esc(photo.label)}">
+                <img src="${esc(photo.src)}" alt="" loading="lazy" decoding="async">
+                <span>${esc(photo.label)}</span>
+              </button>`).join("")}
+          </div>
+        </div>` : "";
       const el = document.createElement("article");
       el.className = "film" + (i % 2 ? " film--flip" : "");
       el.innerHTML = `
@@ -128,13 +140,20 @@
           ${ad.client || ad.duration ? `<p class="film__client">${[ad.client, ad.duration].filter(Boolean).map(esc).join(" · ")}</p>` : ""}
           ${ad.roles?.length ? `<ul class="chips">${ad.roles.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
           <ul class="film__points">${(ad.points || []).map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
-          <button class="btn btn--solid" type="button">观看影片</button>
+          <div class="film__actions">
+            <button class="btn btn--solid" type="button">观看影片</button>
+            ${processGallery}
+          </div>
         </div>`;
       const media = $(".film__media", el);
       fillCover(media, ad, { w: 1280, h: 720 });
       const go = () => openMedia({ ...ad, type: "video" }, ad.title);
       media.addEventListener("click", go);
-      $(".film__body .btn", el).addEventListener("click", go);
+      $(".film__actions .btn", el).addEventListener("click", go);
+      $$(".film__process-photo", el).forEach((button, index) => {
+        const photo = processImages[index];
+        button.addEventListener("click", () => openMedia({ ...photo, type: "image" }, photo.label));
+      });
       box.appendChild(el);
     });
   }

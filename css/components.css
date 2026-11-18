@@ -30,7 +30,27 @@
 .film__points { margin: 4px 0 0; padding-left: 1.1em; color: rgba(251,238,244,.8); }
 .film__points li { margin-bottom: 6px; }
 .film__points li::marker { color: var(--amber); }
-.film .btn { align-self: flex-start; margin-top: 6px; }
+.film__actions {
+  display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;
+  gap: 16px 20px; margin-top: 6px;
+}
+.film__process { flex: 0 1 60%; min-width: min(190px, 100%); max-width: 320px; }
+.film__process-label { margin: 0 0 7px; color: var(--ash); font-size: var(--t-xs); }
+.film__process-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.film__process-photo {
+  display: grid; gap: 5px; padding: 0; min-width: 0; border: 0; background: transparent;
+  color: var(--ash); font-size: var(--t-xs); text-align: left; cursor: zoom-in;
+}
+.film__process-photo img {
+  display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--steel-2);
+}
+.film__process-photo:hover { color: var(--bone); }
+.film__process-photo:hover img, .film__process-photo:focus-visible img { border-color: var(--amber); }
+@media (max-width: 560px) {
+  .film__actions { flex-direction: column; }
+  .film__process { width: min(70%, 260px); }
+}
 
 /* ---------- 02 数字人：指标 ---------- */
 .spec {
