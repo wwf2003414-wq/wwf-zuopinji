@@ -227,9 +227,6 @@
 .resume__meta { font-family: var(--f-latin); font-size: var(--t-xs); color: var(--ash); }
 .resume:hover { background: var(--steel-2); border-color: rgba(255,79,163,.35); border-left-color: var(--amber); }
 .resume:hover .resume__icon svg { transform: translateY(2px); }
-.resume.is-pending { border-left-color: var(--cyan); }
-.resume.is-pending .resume__icon { background: var(--cyan); }
-.resume__status { margin: 8px 0 0; min-height: 1.6em; font-size: var(--t-xs); color: var(--cyan); }
 
 /* ---------- 声音对比：还没上传的那一条 ---------- */
 .voice__row:disabled { cursor: default; opacity: .62; }

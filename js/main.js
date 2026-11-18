@@ -460,40 +460,10 @@
   // 从手机宽度拉回桌面宽度时，重新对齐进度
   addEventListener("resize", () => { if (curSection) fillTo(curSection); });
 
-  /* ---------- 下载简历 ----------
-     data.js 里 SITE.resume.src 填了文件路径就直接下载；
-     还没填时点击只给出提示，不跳转 */
-  function setupResume() {
-    const btn = $("#resumeBtn"), status = $("#resumeStatus");
-    if (!btn) return;
-    const r = site.resume || {};
-    if (r.meta) $(".resume__meta", btn).textContent = r.meta;
-    if (r.src) {
-      btn.href = r.src;
-      btn.setAttribute("download", r.filename || "");
-      btn.removeAttribute("role");
-      return;
-    }
-    let timer = 0;
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      clearTimeout(timer);
-      btn.classList.add("is-pending");
-      $(".resume__label", btn).textContent = "简历更新中";
-      status.textContent = "新版简历整理好后会放在这里，可以先发邮件索取。";
-      timer = setTimeout(() => {
-        btn.classList.remove("is-pending");
-        $(".resume__label", btn).textContent = "下载简历";
-        status.textContent = "";
-      }, 3200);
-    });
-  }
-
   renderFilms();
   renderVoices();
   renderFlow();
   renderAccounts();
   renderTracks();
   setupCopy();
-  setupResume();
 })();

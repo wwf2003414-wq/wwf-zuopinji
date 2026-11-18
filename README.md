@@ -1,55 +1,39 @@
 # 王炜锋 — AI 视频作品集
 
-AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安装依赖、不需要构建，双击 `index.html` 就能打开。
-
-## 页面结构
-
-1. **首页**：可互动的波形开屏（鼠标拨动、点击发脉冲）+ 右侧作品目录
-2. **01 AI 创意广告片**：大图 + 分工 + 要点
-3. **02 拟真数字人**：关键指标 → 声音对比 + 账号成果 → 可点击的 7 步流程（每步：操作面板截图 + 产出效果）
-4. **03 AI 音乐**
-5. **关于**：照片、HR 视角的简介和亮点数据、技能、经历
-6. **联系**：邮箱、手机号和微信号，均可一键复制
-
-## 替换内容：只改 `js/data.js`
-
-| 版块 | 字段 | 填什么 |
-| --- | --- | --- |
-| 广告片 `ads` | `embed` 或 `src`、`cover` | B 站嵌入链接或本地视频；封面图 |
-| 声音对比 `voices` | `clips`（每条 `kind`、`label`、`src`）、`text` | `kind` 为 `real`（真人）或 `ai`（AI 生成），`label` 是按钮文字 |
-| 产出流程 `pipeline` | 每一步的 `panel`、`results` | `panel`：操作面板截图，或 `type: "text"` 的文字说明；`results`：效果，可放多个（会出现切换按钮），`type` 为 `video` / `image` / `audio` |
-| AI 音乐 `music` | `src`、`title`、`subtitle`、`duration` | 音频文件和信息 |
-
-- 没填媒体的位置会显示「待上传」和自动生成的占位封面；没填 `src` 的音频会播放示例音。
-- B 站嵌入链接：`https://player.bilibili.com/player.html?bvid=BV号&autoplay=0`
-- 文件放进 `assets/media/`（音视频）和 `assets/images/`（图片）。单个文件建议小于 50MB，GitHub 上限是 100MB；大视频建议先传 B 站再用 `embed`。
-
-个人简介、技能、经历、联系方式在 `index.html` 里直接改。
-
-## 部署上线（仓库保持私有）
-
-免费 GitHub 的私有仓库不能用 GitHub Pages，可以用下面的平台，都支持私有仓库，每次 push 后自动更新：
-
-**Vercel**：用 GitHub 登录 https://vercel.com → Add New → Project → 选 `wwf-zuopinji` → Framework Preset 选 Other → Deploy
-
-**Netlify**：用 GitHub 登录 https://app.netlify.com → Add new site → Import from GitHub → 选 `wwf-zuopinji` → Build command 留空，Publish directory 填 `.` → Deploy
+作品集包含 AI 创意广告片、拟真数字人和 AI 音乐。个人简介、简历下载与联系方式也在网站上。[查看公开作品集](https://wwf2003414-wq.github.io/wwf-zuopinji/)
 
 ## 文件结构
 
 ```
-index.html          页面结构和个人信息
-css/fonts.css       字体声明（自托管，不依赖 Google Fonts），最先加载
-css/style.css       基础样式（配色、导航、开屏、播放器）
-css/components.css  各版块样式（广告片、数字人、音乐）
-css/cinema.css      「暗场放映」统一视觉层（配色、字体、圆角、特效样式），最后加载
-js/data.js          作品数据（最常改的文件）
-js/player.js        底部音频播放器
-js/demo-audio.js    占位音频生成
-js/main.js          各版块渲染、导航、视频弹窗、片头倒数
-js/fx.js            视觉特效：放映光束、胶片颗粒、乱码解码、跑马灯、聚光灯卡片、3D 倾斜、数字滚动
-assets/             图标、照片、媒体文件
-assets/fonts/       字体文件（Noto Sans SC、Noto Serif SC、Big Shoulders Display）
+index.html          首页、个人简介、简历入口和联系方式
+css/                字体声明、页面样式和组件样式
+js/
+  data.js           广告片、拟真数字人和音乐的作品数据
+  main.js           作品渲染、导航和视频弹窗
+  player.js         底部音频播放器
+  demo-audio.js     示例音频
+  fx.js             页面动效
+assets/
+  documents/        简历 PDF
+  images/           个人照片和流程截图
+  media/            作品视频、音频和封面
+  fonts/            自托管字体
+  favicon.svg       网站图标
 ```
+
+## 更新内容
+
+| 内容 | 更新位置 |
+| --- | --- |
+| 简介、技能、经历和联系方式 | `index.html` |
+| 下载简历 | 替换 `assets/documents/aigc-director-wang-weifeng.pdf`。文件路径或下载文件名有变化时，同步修改 `index.html` 中的简历链接。 |
+| 创意广告片 | 在 `js/data.js` 的 `ads` 中改标题、简介、封面与视频。用 `src` 引用仓库内视频，或用 `embed` 填写站外播放器地址。 |
+| 拟真数字人 | 在 `js/data.js` 的 `voices`、`pipeline` 和 `accounts` 中维护声音对比、制作流程和账号成果。 |
+| AI 音乐 | 在 `js/data.js` 的 `music` 中改曲名、音频地址和时长。 |
+
+## 预览与发布
+
+本地双击 `index.html` 即可预览，网站使用 HTML、CSS 和 JavaScript。GitHub Pages 从 `main` 分支的根目录部署，提交到 `main` 后会自动更新公开网站。[查看部署记录](https://github.com/wwf2003414-wq/wwf-zuopinji/actions)
 
 ## 字体
 
