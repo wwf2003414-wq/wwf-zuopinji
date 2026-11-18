@@ -358,6 +358,7 @@ main, .footer { margin-left: var(--rail); }
 
 /* ---------- 联系 ---------- */
 .contact__wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 64px; align-items: end; }
+.contact__methods { display: grid; gap: 12px; }
 .contact__lead { font-size: var(--t-lg); color: rgba(251,238,244,.8); margin: 28px 0 0; }
 .copybox {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto;
@@ -369,6 +370,7 @@ main, .footer { margin-left: var(--rail); }
   font-family: var(--f-latin); font-weight: 600; font-size: clamp(1.25rem, 2.6vw, 2.1rem); line-height: 1.2;
   word-break: break-all; user-select: all;
 }
+.copybox__value[href]:hover { color: var(--amber); }
 .copybox__btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 12px 20px; min-width: 112px; justify-content: center;

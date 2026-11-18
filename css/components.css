@@ -178,16 +178,6 @@
 .flow__panel.is-enter .flow__result { animation-delay: .1s; }
 @keyframes flowIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-/* ---------- 04 视觉短片 ---------- */
-.shorts { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-.short { display: flex; flex-direction: column; gap: 4px; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
-.short__media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--steel-2); margin-bottom: 10px; }
-.short__media canvas, .short__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
-.short:hover .short__media { outline: 1px solid var(--amber); }
-.short:hover .short__media canvas, .short:hover .short__media img { transform: scale(1.03); }
-.short__title { font-weight: 500; font-size: var(--t-lg); }
-.short__note { color: var(--ash); font-size: var(--t-sm); }
-
 /* ---------- 关于：技能 ---------- */
 .skills { margin: 0; display: grid; gap: 1px; background: var(--line); }
 .skills div { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; padding: 12px 0; background: var(--steel); }
@@ -247,17 +237,3 @@
 .voice__row:disabled .voice__play { background: var(--steel-2); color: var(--ash); }
 .voice__row:disabled .voice__wave { filter: grayscale(1); opacity: .5; }
 .voice__tag { font-size: var(--t-xs); padding: 1px 8px; border: 1px solid rgba(251,238,244,.25); color: var(--ash); white-space: nowrap; }
-
-/* ---------- 04 视觉短片：标题左、短片右 ---------- */
-.shorts-sec__wrap {
-  display: grid; grid-template-columns: minmax(220px, 1fr) minmax(0, 2.4fr);
-  gap: clamp(28px, 4vw, 64px); align-items: center;
-}
-.shorts-sec__head .section__note { margin-top: 18px; }
-.shorts-sec .shorts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (max-width: 900px) {
-  .shorts-sec__wrap { grid-template-columns: 1fr; }
-}
-@media (max-width: 560px) {
-  .shorts-sec .shorts { grid-template-columns: 1fr; }
-}

@@ -8,9 +8,8 @@ AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安
 2. **01 AI 创意广告片**：大图 + 分工 + 要点
 3. **02 拟真数字人**：关键指标 → 声音对比 + 账号成果 → 可点击的 7 步流程（每步：操作面板截图 + 产出效果）
 4. **03 AI 音乐**
-5. **04 视觉短片**
-6. **关于**：照片、HR 视角的简介和亮点数据、技能、经历
-7. **联系**：邮箱 + 一键复制按钮
+5. **关于**：照片、HR 视角的简介和亮点数据、技能、经历
+6. **联系**：邮箱、手机号和微信号，均可一键复制
 
 ## 替换内容：只改 `js/data.js`
 
@@ -20,7 +19,6 @@ AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安
 | 声音对比 `voices` | `clips`（每条 `kind`、`label`、`src`）、`text` | `kind` 为 `real`（真人）或 `ai`（AI 生成），`label` 是按钮文字 |
 | 产出流程 `pipeline` | 每一步的 `panel`、`results` | `panel`：操作面板截图，或 `type: "text"` 的文字说明；`results`：效果，可放多个（会出现切换按钮），`type` 为 `video` / `image` / `audio` |
 | AI 音乐 `music` | `src`、`title`、`subtitle`、`duration` | 音频文件和信息 |
-| 视觉短片 `shorts` | `embed` 或 `src`、`cover`、`note` | 视频和一句话介绍 |
 
 - 没填媒体的位置会显示「待上传」和自动生成的占位封面；没填 `src` 的音频会播放示例音。
 - B 站嵌入链接：`https://player.bilibili.com/player.html?bvid=BV号&autoplay=0`
@@ -42,7 +40,7 @@ AIGC 视频作品集网站。纯静态页面（HTML + CSS + JS），不需要安
 index.html          页面结构和个人信息
 css/fonts.css       字体声明（自托管，不依赖 Google Fonts），最先加载
 css/style.css       基础样式（配色、导航、开屏、播放器）
-css/components.css  各版块样式（广告片、数字人、音乐、短片）
+css/components.css  各版块样式（广告片、数字人、音乐）
 css/cinema.css      「暗场放映」统一视觉层（配色、字体、圆角、特效样式），最后加载
 js/data.js          作品数据（最常改的文件）
 js/player.js        底部音频播放器

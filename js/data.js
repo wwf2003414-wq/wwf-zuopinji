@@ -18,30 +18,31 @@ window.SITE = {
   /* ---------- AI 创意广告宣传片 ---------- */
   ads: [
     {
+      id: "creative-ad",
+      title: "《差不多就得了吧？》",
+      duration: "1:08",
+      points: [
+        "从一句「差不多就得了吧」切入，以一位交易员的职业回忆讲述认真做事的价值。",
+        "用日记和旧照片打开回忆，再以账本、老式电脑和报纸头版串起不同年代的市场波动。",
+        "镜头从忙碌的交易大厅回到安静的书房，让年长的交易员回望自己的经历，呼应开场。"
+      ],
+      src: "assets/media/creative-ad.mp4",
+      cover: "assets/media/creative-ad.jpg"
+    },
+    {
       id: "ebc",
       title: "EBC 品牌宣传片",
       client: "EBC Financial Group",
       roles: ["创意策划", "编剧", "分镜", "声音设计"],
       duration: "0:52",
       points: [
-        "主导创意策划与脚本编写，完成分镜设计，确定全片叙事结构与镜头节奏。",
-        "全片画面均由 AI 生成。",
-        "独立完成配乐与音效设计：按音乐节奏规划画面节点，用声音强化情绪与品牌记忆点。"
+        "为 EBC Financial Group 主导创意策划、脚本编写和分镜设计，确定品牌故事的叙事结构与镜头节奏。",
+        "全片画面由 AI 生成，按分镜组织镜头和场景转换。",
+        "独立完成配乐与音效设计，让音乐节拍与关键镜头配合，强化情绪变化和品牌记忆点。"
       ],
       embed: "",
       src: "assets/media/ebc.mp4",
       cover: "assets/media/ebc.jpg"
-    },
-    {
-      id: "ad-2",
-      title: "AI 创意广告片（第二支，待补充）",
-      client: "",
-      roles: ["创意", "AI 生成", "剪辑", "声音设计"],
-      duration: "",
-      points: ["占位：替换为这支广告片的创意、你的分工和使用的工具。"],
-      embed: "",
-      src: "",
-      cover: ""
     }
   ],
 
@@ -177,11 +178,5 @@ window.SITE = {
   music: [
     { id: "m-yaogun", title: "摇滚", subtitle: "AI 原创音乐 · 摇滚", duration: "1:00", src: "assets/media/music-yaogun.mp3" },
     { id: "m-rnb", title: "R&B", subtitle: "AI 原创音乐 · R&B", duration: "1:01", src: "assets/media/music-rnb.mp3" }
-  ],
-
-  /* ---------- 个人创意视觉短片（非项目） ---------- */
-  shorts: [
-    { id: "s1", title: "创意视觉短片一", note: "占位：一句话介绍", embed: "", src: "", cover: "" },
-    { id: "s2", title: "创意视觉短片二", note: "占位：一句话介绍", embed: "", src: "", cover: "" }
   ]
 };

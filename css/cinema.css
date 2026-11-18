@@ -88,7 +88,7 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .about__side { border-top: 1px solid rgba(255,158,207,.45); }
 .facts { gap: 1px; }
 .account { border-left: 0; box-shadow: inset 3px 0 0 var(--amber); }
-.film__media, .short__media, .flow__frame, .portrait-frame { border-radius: var(--gate); }
+.film__media, .flow__frame, .portrait-frame { border-radius: var(--gate); }
 .film__media { clip-path: none; box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(251,238,244,.06); }
 .portrait { clip-path: none; }
 .portrait-frame { position: relative; overflow: hidden; }
@@ -118,7 +118,7 @@ body::before { content: none; } /* 旧的扫描线去掉，换成胶片颗粒 */
 .dc.is-enc { color: var(--amber); opacity: .5; text-shadow: none; }
 
 /* ---------- 标题：片头字幕卡 ---------- */
-.section__title, .about__lead, .film__title, .flow__title, .sub, .contact__lead, .short__title, .flow__textlabel {
+.section__title, .about__lead, .film__title, .flow__title, .sub, .contact__lead, .flow__textlabel {
   font-family: var(--f-title);
 }
 .section__title { font-weight: 900; font-size: clamp(2.4rem, 4.6vw, 3.6rem); letter-spacing: .02em; }

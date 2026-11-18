@@ -125,8 +125,8 @@
         </button>
         <div class="film__body">
           <h3 class="film__title">${esc(ad.title)}</h3>
-          ${ad.client ? `<p class="film__client">甲方：${esc(ad.client)}</p>` : ""}
-          <ul class="chips">${(ad.roles || []).map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
+          ${ad.client || ad.duration ? `<p class="film__client">${[ad.client, ad.duration].filter(Boolean).map(esc).join(" · ")}</p>` : ""}
+          ${ad.roles?.length ? `<ul class="chips">${ad.roles.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
           <ul class="film__points">${(ad.points || []).map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
           <button class="btn btn--solid" type="button">观看影片</button>
         </div>`;
@@ -334,12 +334,8 @@
     go(0);
   }
 
-  /* ---------- 复制邮箱 ---------- */
+  /* ---------- 复制联系方式 ---------- */
   function setupCopy() {
-    const btn = $("#copyMail");
-    if (!btn) return;
-    const label = $("span", btn);
-    let timer = 0;
     async function copy(text) {
       try { await navigator.clipboard.writeText(text); return true; }
       catch (e) {
@@ -352,17 +348,30 @@
         return ok;
       }
     }
-    btn.addEventListener("click", async () => {
-      const ok = await copy(btn.dataset.copy);
-      clearTimeout(timer);
-      btn.classList.toggle("is-copied", ok);
-      if (!ok) {
-        // 浏览器不允许写剪贴板时，帮用户选中邮箱文字
-        const r = document.createRange(); r.selectNodeContents($("#mailText"));
-        const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
-      }
-      label.textContent = ok ? "已复制" : "已选中，按 Ctrl+C";
-      timer = setTimeout(() => { btn.classList.remove("is-copied"); label.textContent = "复制"; }, 2200);
+
+    $$(".copybox").forEach((box) => {
+      const btn = $(".copybox__btn", box);
+      const value = $(".copybox__value", box);
+      const label = $("span", btn);
+      let timer = 0;
+
+      btn.addEventListener("click", async () => {
+        const ok = await copy(value.textContent.trim());
+        clearTimeout(timer);
+        btn.classList.toggle("is-copied", ok);
+        if (!ok) {
+          const range = document.createRange();
+          range.selectNodeContents(value);
+          const selection = getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+        label.textContent = ok ? "已复制" : "已选中";
+        timer = setTimeout(() => {
+          btn.classList.remove("is-copied");
+          label.textContent = "复制";
+        }, 2200);
+      });
     });
   }
 
@@ -391,21 +400,6 @@
         <span role="cell"><button class="track__go" type="button" aria-label="播放：${esc(w.title)}">${ICON_PLAY}</button></span>`;
       row.addEventListener("click", () => window.Player.play(w));
       list.appendChild(row);
-    });
-  }
-
-  /* ---------- 视觉短片 ---------- */
-  function renderShorts() {
-    const box = $("#shortList");
-    (site.shorts || []).forEach((s) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "short";
-      b.innerHTML = `<span class="short__media tilt" data-tilt="7"></span><span class="short__title">${esc(s.title)}</span><span class="short__note">${esc(s.note)}</span>`;
-      fillCover($(".short__media", b), s, { w: 640, h: 360 });
-      if (!hasMedia(s)) $(".short__media", b).insertAdjacentHTML("beforeend", '<span class="pending">待上传</span>');
-      b.addEventListener("click", () => openMedia({ ...s, type: "video" }, s.title));
-      box.appendChild(b);
     });
   }
 
@@ -500,7 +494,6 @@
   renderFlow();
   renderAccounts();
   renderTracks();
-  renderShorts();
   setupCopy();
   setupResume();
 })();
